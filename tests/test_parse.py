@@ -70,6 +70,16 @@ def test_heading_split_over_two_lines():
     assert paras[1].heading == paras[0].text
 
 
+def test_sentence_after_heading_is_not_joined_to_it():
+    paras = build_paragraphs(
+        lines("Schedule III", "stands delegated to the Authorised Dealer banks.", "1. Text.")
+    )
+    assert paras[0].text == "Schedule III"
+    assert paras[1].text == "stands delegated to the Authorised Dealer banks."
+    paras = build_paragraphs(lines("1. Text.", "Schedule III stands delegated to the AD banks."))
+    assert all(p.kind == "text" for p in paras)
+
+
 def test_paragraph_number_on_its_own_line():
     paras = build_paragraphs(lines("2.", "Subsequently on April 16, 2024, the RBI placed"))
     assert paras[0].para == "2"

@@ -29,8 +29,9 @@ class Settings(BaseSettings):
 
     # Chunking
     chunk_strategy: str = Field(default="section", pattern="^(fixed|recursive|section)$")
-    chunk_size_tokens: int = 512
-    chunk_overlap_tokens: int = 64
+    chunk_size_tokens: int = 400  # bge models read at most 512 tokens; leaves room for headers
+    chunk_overlap_tokens: int = 60  # fixed strategy only
+    section_min_tokens: int = 150  # section strategy: break at a new paragraph after this
 
     # Retrieval
     retrieval_mode: str = Field(default="hybrid", pattern="^(dense|bm25|hybrid)$")

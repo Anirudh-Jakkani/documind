@@ -32,7 +32,7 @@ from documind.config import get_settings
 CHAPTER_RE = re.compile(r"^(Chapter|CHAPTER)\s*[-–]?\s*([IVXLC]+|\d+)\b\s*[-–—:.]?\s*(.*)$")
 # "Annex II", "Annexure - 1", "Annex I Reporting format ..." but not "Annex III along with ..."
 ANNEX_RE = re.compile(
-    r"^(Annex(?:ure)?|Appendix|Schedule)\s*[-–—]?\s*([IVXLC]+|\d+)\s*[-–—:.]?\s*([A-Z(\[].*)?$"
+    r"^(Annex(?:ure)?|Appendix|Schedule)\s*[-–—]?\s*([IVXLC]+|\d+)\b\s*[-–—:.]?\s*([A-Z(\[].*)?$"
 )
 PART_RE = re.compile(r"^(Part|PART)\s+([A-Z]|[IVXLC]+|\d+)\b\s*[-–—:.]?\s*([A-Z(].*)?$")
 # "A. Short Title and Commencement", "B.2 Review by the Audit Committee of the Board"
@@ -251,6 +251,8 @@ def build_paragraphs(lines: list[Line]) -> list[Paragraph]:
             and current.kind == "heading"
             and current.page_end == line.page
             and text[:1].islower()
+            and len(text) < 70
+            and not text.rstrip().endswith((".", ";", ":"))
         ):
             was_chapter = current.text == chapter
             current.text = join_text(current.text, text)
