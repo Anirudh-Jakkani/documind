@@ -99,5 +99,30 @@ def key_span(quote: str, words: int = 12) -> str:
     return " ".join(tokens[start : start + words])
 
 
-def chunk_contains(chunk_text: str, evidence: Evidence) -> bool:
-    return key_span(evidence.quote) in normalise(chunk_text)
+def longest_run(quote_words: list[str], text: str) -> int:
+    """Length of the longest run of consecutive quote words that appears in `text`."""
+    best = 0
+    for start in range(len(quote_words)):
+        if len(quote_words) - start <= best:
+            break
+        end = start + best + 1  # only longer runs matter
+        while end <= len(quote_words) and " ".join(quote_words[start:end]) in text:
+            best = end - start
+            end += 1
+    return best
+
+
+def is_relevant(chunk_doc_id: str, normalised_text: str, evidence: Evidence) -> bool:
+    """A chunk holds the evidence if it contains the quote's middle span (from any document:
+    the same rule text sometimes appears in two directions), or, from the same document, at
+    least half of the quote as one unbroken run, for when a chunk boundary cuts the quote."""
+    if key_span(evidence.quote) in normalised_text:
+        return True
+    if chunk_doc_id != evidence.doc_id:
+        return False
+    words = normalise(evidence.quote).split()
+    return longest_run(words, normalised_text) >= max(6, (len(words) + 1) // 2)
+
+
+def chunk_contains(chunk_text: str, evidence: Evidence, chunk_doc_id: str = "") -> bool:
+    return is_relevant(chunk_doc_id or evidence.doc_id, normalise(chunk_text), evidence)

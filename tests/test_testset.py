@@ -40,6 +40,22 @@ def test_chunk_boundary_still_matches_key_span():
     assert len(key_span(quote).split()) == 12
 
 
+def test_quote_split_across_chunks_counts_for_the_chunk_with_most_of_it():
+    quote = (
+        "(5) Bank Rate means the rate published by Reserve Bank in terms of Section 49 of the "
+        "RBI Act."
+    )
+    evidence = Evidence("rbi-13140", quote)
+    first_half = (
+        "Interest is paid quarterly. (5) Bank Rate means the rate published by Reserve Bank "
+        "in terms of"
+    )
+    second_half = "Section 49 of the RBI Act. (6) Banking Ombudsman means the person appointed."
+    assert chunk_contains(first_half, evidence, "rbi-13140")
+    assert not chunk_contains(second_half, evidence, "rbi-13140")  # only the tail end
+    assert not chunk_contains(first_half, evidence, "rbi-99999")  # other doc needs the key span
+
+
 def test_records_round_trip(tmp_path):
     path = tmp_path / "set.jsonl"
     record = Record("s001", "Q?", "A.", "single", evidence=[Evidence("rbi-1", "quote", "3", 4)])
