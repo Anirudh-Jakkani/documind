@@ -77,8 +77,8 @@ def fetch(client: httpx.Client, url: str) -> bytes:
 def write_link_page(documents: list[dict], target: Path) -> None:
     rows = "\n".join(
         f'<li><a href="{html.escape(d["pdf_url"])}" target="_blank">'
-        f'{html.escape(d["title"])}</a> <small>{html.escape(source_filename(d))}, '
-        f'{d["size_kb"]} KB</small></li>'
+        f"{html.escape(d['title'])}</a> <small>{html.escape(source_filename(d))}, "
+        f"{d['size_kb']} KB</small></li>"
         for d in documents
     )
     target.parent.mkdir(parents=True, exist_ok=True)
@@ -109,8 +109,10 @@ def main() -> int:
     link_page = ROOT_DIR / "docs" / "download_links.html"
 
     missing: list[str] = []
-    client = None if args.from_folder else httpx.Client(
-        headers={"User-Agent": USER_AGENT}, timeout=60, follow_redirects=True
+    client = (
+        None
+        if args.from_folder
+        else httpx.Client(headers={"User-Agent": USER_AGENT}, timeout=60, follow_redirects=True)
     )
     try:
         for i, doc in enumerate(documents, 1):

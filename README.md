@@ -15,8 +15,8 @@ Demo documents: RBI Master Directions and FAQs.
 | Phase | What | Status |
 |---|---|---|
 | 0 | Project setup, config, health endpoint, tests | ✅ |
-| 1 | Collect and parse documents | ⏳ |
-| 2 | Chunking and indexing (Qdrant + BM25) | |
+| 1 | Collect and parse documents | ✅ |
+| 2 | Chunking and indexing (Qdrant + BM25) | ⏳ |
 | 3 | First working version with citations | |
 | 4 | Test set (~150 questions, incl. unanswerable) | |
 | 5 | Evaluation harness and baseline scores | |
