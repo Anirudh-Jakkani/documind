@@ -4,9 +4,14 @@ __pycache__/
 .pytest_cache/
 .ruff_cache/
 .env
+.env.*
+!.env.example
 
 # Downloaded and generated data (the document list is committed, the files are not)
 data/raw/*
 data/processed/*
 data/index/*
 !data/**/.gitkeep
+
+# Generator bookkeeping
+eval/.generate_progress.json

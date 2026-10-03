@@ -16,10 +16,21 @@ class Settings(BaseSettings):
     data_dir: Path = ROOT_DIR / "data"
     index_dir: Path = ROOT_DIR / "data" / "index"
 
-    # LLM: any OpenAI-compatible API (OpenRouter, Groq, ...)
-    llm_base_url: str = "https://openrouter.ai/api/v1"
-    llm_api_key: str = ""
-    llm_model: str = ""
+    # API keys, one per provider (all OpenAI-compatible)
+    gemini_api_key: str = ""
+    groq_api_key: str = ""
+    openrouter_api_key: str = ""
+
+    # The model that writes DocuMind's answers
+    llm_provider: str = Field(default="gemini", pattern="^(gemini|groq|openrouter)$")
+    llm_model: str = "gemini-3.5-flash-lite"  # fast and reliable on the free tier
+    llm_fallback_model: str = ""  # same provider, used while the main model is overloaded
+
+    # The model that grades answers in the evaluation: a different family from the answerer,
+    # so it doesn't favour its own style
+    judge_provider: str = Field(default="groq", pattern="^(gemini|groq|openrouter)$")
+    judge_model: str = "openai/gpt-oss-120b"
+
     llm_temperature: float = 0.0
     llm_max_tokens: int = 1500  # reasoning models spend part of this on thinking
     llm_reasoning_effort: str = "low"  # sent only to models that support it (gpt-oss)
@@ -40,9 +51,19 @@ class Settings(BaseSettings):
     top_k_final: int = 5
     use_reranker: bool = True
 
+    def api_key(self, provider: str) -> str:
+        return getattr(self, f"{provider}_api_key", "")
+
     @property
     def llm_configured(self) -> bool:
-        return bool(self.llm_api_key and self.llm_model)
+        return bool(self.api_key(self.llm_provider) and self.llm_model)
+
+
+PROVIDER_URLS = {
+    "gemini": "https://generativelanguage.googleapis.com/v1beta/openai",
+    "groq": "https://api.groq.com/openai/v1",
+    "openrouter": "https://openrouter.ai/api/v1",
+}
 
 
 @lru_cache
