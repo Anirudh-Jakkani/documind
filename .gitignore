@@ -1,0 +1,12 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+.env
+
+# Downloaded and generated data (the document list is committed, the files are not)
+data/raw/*
+data/processed/*
+data/index/*
+!data/**/.gitkeep
