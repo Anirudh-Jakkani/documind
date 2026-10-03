@@ -21,7 +21,8 @@ class Settings(BaseSettings):
     llm_api_key: str = ""
     llm_model: str = ""
     llm_temperature: float = 0.0
-    llm_max_tokens: int = 800
+    llm_max_tokens: int = 1500  # reasoning models spend part of this on thinking
+    llm_reasoning_effort: str = "low"  # sent only to models that support it (gpt-oss)
 
     # Embeddings and reranking (run locally)
     embedding_model: str = "BAAI/bge-small-en-v1.5"
