@@ -19,6 +19,17 @@ class LLMError(RuntimeError):
     pass
 
 
+class DailyLimitError(LLMError):
+    """The provider's daily quota is used up: retrying within minutes won't help."""
+
+
+def is_daily_limit(response: httpx.Response) -> bool:
+    text = response.text.lower()
+    return response.status_code == 429 and (
+        "per day" in text or "perday" in text or "tokens per day" in text
+    )
+
+
 @dataclass
 class Completion:
     text: str
@@ -90,6 +101,11 @@ class LLMClient:
                     raise LLMError(f"network error: {error}") from error
                 time.sleep(2**attempt)
                 continue
+            if is_daily_limit(response):
+                raise DailyLimitError(
+                    f"{self.provider} daily limit reached for {body['model']}: "
+                    f"{response.text[:200]}"
+                )
             if response.status_code == 503:
                 overloaded += 1
                 if overloaded >= OVERLOADED_TRIES_BEFORE_FALLBACK and self.fallback_model:

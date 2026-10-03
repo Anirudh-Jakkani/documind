@@ -1,0 +1,43 @@
+{
+  "name": "baseline",
+  "strategy": "section",
+  "mode": "hybrid",
+  "k": 5,
+  "answer_model": "gemini:gemini-3.5-flash-lite",
+  "judge_model": "groq:qwen/qwen3.8-27b",
+  "questions": 128,
+  "answerable": {
+    "n": 102,
+    "answered": 0.9314,
+    "false_refusal": 0.0686,
+    "correct": 0.8627,
+    "correct_or_partial": 0.9216,
+    "correctness_score_when_answered": 0.9579,
+    "faithful_when_answered": 1.0,
+    "cites_evidence_when_answered": 0.9579,
+    "invalid_citation_rate": 0.0,
+    "retrieval": {
+      "recall@1": 0.7549,
+      "hit@1": 0.7255,
+      "recall@3": 0.9069,
+      "hit@3": 0.8922,
+      "recall@5": 0.9216,
+      "hit@5": 0.9118,
+      "mrr": 0.8435,
+      "ndcg@5": 0.8719
+    }
+  },
+  "unanswerable": {
+    "n": 26,
+    "correct_refusal": 1.0
+  },
+  "multi_part_correct": 0.625,
+  "latency_s": {
+    "p50": 1.44,
+    "p95": 2.17
+  },
+  "tokens_per_question": {
+    "prompt": 1624,
+    "completion": 76
+  }
+}

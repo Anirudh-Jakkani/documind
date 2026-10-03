@@ -29,7 +29,7 @@ class Settings(BaseSettings):
     # The model that grades answers in the evaluation: a different family from the answerer,
     # so it doesn't favour its own style
     judge_provider: str = Field(default="groq", pattern="^(gemini|groq|openrouter)$")
-    judge_model: str = "openai/gpt-oss-120b"
+    judge_model: str = "qwen/qwen3.8-27b"
 
     llm_temperature: float = 0.0
     llm_max_tokens: int = 1500  # reasoning models spend part of this on thinking
