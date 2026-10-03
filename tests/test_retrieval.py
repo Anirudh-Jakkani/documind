@@ -37,3 +37,12 @@ def test_reciprocal_rank_fusion_rewards_agreement():
     order = [item for item, _ in fused]
     assert order[0] == 1  # ranked 1st and 2nd beats 3rd and 1st
     assert set(order) == {1, 2, 3, 4}
+
+
+def test_parse_queries_from_rewriter_reply():
+    from documind.retrieval.rewrite import parse_queries
+
+    assert parse_queries('```json\n{"queries": ["charges levied on fraud", " "]}\n```') == [
+        "charges levied on fraud"
+    ]
+    assert parse_queries("no json here") == []

@@ -24,14 +24,18 @@ from documind.chunking.chunkers import STRATEGIES
 from documind.config import get_settings
 from documind.generation.answer import Answerer
 from documind.generation.llm import DailyLimitError, LLMClient, LLMError
-from documind.retrieval.embedder import Embedder
+from documind.retrieval.embedder import Embedder, model_slug
+from documind.retrieval.reranker import RERANKERS, Reranker
+from documind.retrieval.rewrite import QueryRewriter
 from documind.retrieval.search import Retriever
 from eval.judge import judge
 from eval.metrics import coverage, mean_scores, percentile, retrieval_scores
+from eval.paraphrase import PARAPHRASED_PATH
 from eval.testset import DATASET_PATH, EVAL_DIR, Record, load_records
 
 RESULTS_DIR = EVAL_DIR / "results"
 MODES = ("dense", "bm25", "hybrid")
+DATASETS = {"original": DATASET_PATH, "paraphrased": PARAPHRASED_PATH}
 
 
 def doc_of(chunk_id: str) -> str:
@@ -40,11 +44,31 @@ def doc_of(chunk_id: str) -> str:
 
 # --- Retrieval ----------------------------------------------------------------------------
 
+CONFIG_KEYS = ("dataset", "strategy", "mode", "embedding", "rerank", "rewrite")
+DEFAULT_CONFIG = {
+    "dataset": "original",
+    "embedding": "bge-small-en-v1.5",
+    "rerank": "none",
+    "rewrite": "no",
+}
 
-def evaluate_retrieval(records: list[Record], retriever: Retriever, mode: str, k: int) -> dict:
+
+def load_dataset(name: str) -> list[Record]:
+    return load_records(DATASETS[name])
+
+
+def make_rewriter() -> QueryRewriter:
+    RESULTS_DIR.mkdir(exist_ok=True)
+    return QueryRewriter(LLMClient(), cache_path=RESULTS_DIR / "rewrite_cache.json")
+
+
+def evaluate_retrieval(
+    records: list[Record], retriever: Retriever, mode: str, k: int, reranker=None, rewriter=None
+) -> dict:
     rows, started = [], time.perf_counter()
     for r in records:
-        hits = retriever.search(r.question, mode, k)
+        extra = rewriter.rewrite(r.question) if rewriter else None
+        hits = retriever.search(r.question, mode, k, reranker=reranker, extra_queries=extra)
         covered = coverage([(h.chunk.doc_id, h.chunk.text) for h in hits], r.evidence)
         rows.append(retrieval_scores(covered, len(r.evidence)))
     summary = mean_scores(rows)
@@ -53,33 +77,60 @@ def evaluate_retrieval(records: list[Record], retriever: Retriever, mode: str, k
 
 
 def run_retrieval(args) -> int:
-    records = [r for r in load_records(DATASET_PATH) if r.kind != "unanswerable"]
-    embedder = Embedder(get_settings().embedding_model)
+    settings = get_settings()
+    embedder = Embedder(settings.embedding_model)
+    reranker = Reranker(args.rerank) if args.rerank != "none" else None
+    rewriter = make_rewriter() if args.rewrite else None
     results = []
-    for strategy in args.strategies:
-        retriever = Retriever(strategy, embedder=embedder)
-        for mode in args.modes:
-            scores = evaluate_retrieval(records, retriever, mode, args.k)
-            results.append({"strategy": strategy, "mode": mode, **scores})
-            print(
-                f"  {strategy:<9} {mode:<6} recall@5 {scores['recall@5']:.3f}  "
-                f"MRR {scores['mrr']:.3f}"
-            )
-        retriever.close()
+    for dataset in args.datasets:
+        records = [r for r in load_dataset(dataset) if r.kind != "unanswerable"]
+        for strategy in args.strategies:
+            retriever = Retriever(strategy, embedder=embedder)
+            for mode in args.modes:
+                config = {
+                    "dataset": dataset,
+                    "strategy": strategy,
+                    "mode": mode,
+                    "embedding": model_slug(settings.embedding_model),
+                    "rerank": args.rerank,
+                    "rewrite": "yes" if args.rewrite else "no",
+                }
+                scores = evaluate_retrieval(records, retriever, mode, args.k, reranker, rewriter)
+                results.append({**config, **scores})
+                print(
+                    f"  {' / '.join(config.values())}: recall@5 {scores['recall@5']:.3f}  "
+                    f"MRR {scores['mrr']:.3f}"
+                )
+            retriever.close()
 
+    # Merge with earlier runs: a new result replaces an old one with the same configuration.
     RESULTS_DIR.mkdir(exist_ok=True)
     path = RESULTS_DIR / "retrieval.csv"
+    rows: dict[tuple, dict] = {}
+    if path.exists():
+        with path.open(encoding="utf-8", newline="") as f:
+            for row in csv.DictReader(f):
+                row = {**DEFAULT_CONFIG, **row}
+                rows[tuple(row[c] for c in CONFIG_KEYS)] = row
+    for row in results:
+        rows[tuple(str(row[c]) for c in CONFIG_KEYS)] = row
+    fields = [*CONFIG_KEYS, *[c for c in results[0] if c not in CONFIG_KEYS]]
     with path.open("w", encoding="utf-8", newline="") as f:
-        writer = csv.DictWriter(f, fieldnames=list(results[0]))
+        writer = csv.DictWriter(f, fieldnames=fields, extrasaction="ignore")
         writer.writeheader()
-        writer.writerows(results)
-
-    print(f"\nRetrieval on {len(records)} answerable questions (saved to {path.name})\n")
-    cols = ["recall@1", "recall@5", "recall@10", "hit@5", "mrr", "ndcg@5", "ms_per_query"]
-    print(f"{'strategy':<10}{'mode':<8}" + "".join(f"{c:>12}" for c in cols))
-    for r in sorted(results, key=lambda r: -r["recall@5"]):
-        print(f"{r['strategy']:<10}{r['mode']:<8}" + "".join(f"{r[c]:>12}" for c in cols))
+        writer.writerows(rows.values())
+    print_retrieval_table(list(rows.values()))
     return 0
+
+
+def print_retrieval_table(rows: list[dict]) -> None:
+    cols = ["recall@1", "recall@5", "recall@10", "mrr", "ms_per_query"]
+    print("\n" + "".join(f"{c:<12}" for c in CONFIG_KEYS) + "".join(f"{c:>11}" for c in cols))
+    for r in sorted(rows, key=lambda r: (r["dataset"], -float(r["recall@5"]))):
+        print(
+            "".join(f"{str(r[c])[:11]:<12}" for c in CONFIG_KEYS)
+            + "".join(f"{float(r[c]):>11.3f}" for c in cols)
+        )
 
 
 # --- Answers ------------------------------------------------------------------------------
@@ -174,7 +225,7 @@ def summarise(rows: list[dict], config: dict) -> dict:
 
 def run_answers(args) -> int:
     settings = get_settings()
-    records = load_records(DATASET_PATH)
+    records = load_dataset(args.dataset)
     if args.limit:
         records = records[: args.limit]
     RESULTS_DIR.mkdir(exist_ok=True)
@@ -190,13 +241,22 @@ def run_answers(args) -> int:
     k = args.k or settings.top_k_final
     print(f"{len(done)} already done, {len(todo)} to go ({strategy}, {mode}, top {k})")
 
-    answerer = Answerer(Retriever(strategy), LLMClient())
+    answerer = Answerer(
+        Retriever(strategy),
+        LLMClient(),
+        reranker=Reranker(args.rerank) if args.rerank != "none" else None,
+        rewriter=make_rewriter() if args.rewrite else None,
+    )
     judge_llm = LLMClient(role="judge")
     config = {
         "name": args.name,
+        "dataset": args.dataset,
         "strategy": strategy,
         "mode": mode,
         "k": k,
+        "embedding": model_slug(settings.embedding_model),
+        "rerank": args.rerank,
+        "rewrite": "yes" if args.rewrite else "no",
         "answer_model": f"{answerer.llm.provider}:{answerer.llm.model}",
         "judge_model": f"{judge_llm.provider}:{judge_llm.model}",
     }
@@ -277,6 +337,9 @@ def main() -> int:
     p.add_argument("--strategies", nargs="+", default=list(STRATEGIES), choices=STRATEGIES)
     p.add_argument("--modes", nargs="+", default=list(MODES), choices=MODES)
     p.add_argument("-k", type=int, default=10)
+    p.add_argument("--datasets", nargs="+", default=["original"], choices=list(DATASETS))
+    p.add_argument("--rerank", default="none", choices=["none", *RERANKERS])
+    p.add_argument("--rewrite", action="store_true", help="LLM query rewriting (cached)")
     p.set_defaults(func=run_retrieval)
 
     p = sub.add_parser("answers", help="answer every question and grade it")
@@ -285,6 +348,9 @@ def main() -> int:
     p.add_argument("--mode", choices=MODES)
     p.add_argument("-k", type=int)
     p.add_argument("--limit", type=int, help="only the first N questions (for a quick test)")
+    p.add_argument("--dataset", default="original", choices=list(DATASETS))
+    p.add_argument("--rerank", default="none", choices=["none", *RERANKERS])
+    p.add_argument("--rewrite", action="store_true", help="LLM query rewriting (cached)")
     p.set_defaults(func=run_answers)
 
     p = sub.add_parser("report", help="print saved answer summaries")

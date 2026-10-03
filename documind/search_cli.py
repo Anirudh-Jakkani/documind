@@ -9,6 +9,7 @@ import sys
 import textwrap
 
 from documind.chunking.chunkers import STRATEGIES
+from documind.retrieval.reranker import RERANKERS, Reranker
 from documind.retrieval.search import Retriever
 
 
@@ -18,13 +19,15 @@ def main() -> int:
     parser.add_argument("--mode", choices=["dense", "bm25", "hybrid"], default="hybrid")
     parser.add_argument("--strategy", choices=STRATEGIES, default=None)
     parser.add_argument("-k", type=int, default=5)
+    parser.add_argument("--rerank", choices=sorted(RERANKERS), help="rerank with a cross-encoder")
     args = parser.parse_args()
 
     retriever = Retriever(args.strategy)
-    hits = retriever.search(args.query, args.mode, args.k)
+    reranker = Reranker(args.rerank) if args.rerank else None
+    hits = retriever.search(args.query, args.mode, args.k, reranker=reranker)
     print(f'\n"{args.query}"  ({args.mode}, {retriever.strategy} chunks)\n')
     for rank, hit in enumerate(hits, 1):
-        ranks = f"dense #{hit.dense_rank or '-'}  bm25 #{hit.bm25_rank or '-'}"
+        ranks = f"before rerank #{hit.first_stage_rank}" if hit.first_stage_rank else ""
         print(f"{rank}. {hit.chunk.citation()}")
         print(f"   score {hit.score:.4f}   {ranks}   {hit.chunk.n_tokens} tokens")
         print(textwrap.indent(textwrap.fill(hit.chunk.text[:400] + " ...", 96), "   "))

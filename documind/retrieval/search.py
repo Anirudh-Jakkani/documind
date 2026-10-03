@@ -17,6 +17,7 @@ class Hit:
     score: float
     dense_rank: int | None = None
     bm25_rank: int | None = None
+    first_stage_rank: int | None = None  # rank before reranking
 
 
 def index_paths(settings: Settings, strategy: str) -> dict[str, Path]:
@@ -77,32 +78,53 @@ class Retriever:
         points = self.qdrant.query_points(self.collection, query=vector, limit=k).points
         return [(point.id, point.score) for point in points]
 
-    def search(self, query: str, mode: str | None = None, k: int | None = None) -> list[Hit]:
-        mode = mode or self.settings.retrieval_mode
-        k = k or self.settings.top_k_final
-        n = max(k, self.settings.top_k_candidates)
-
+    def first_stage(self, query: str, mode: str, n: int) -> list[tuple[int, float]]:
+        """Chunk indices and scores from dense, BM25 or hybrid search."""
         if mode == "dense":
-            return [
-                Hit(self.chunks[i], s, dense_rank=r)
-                for r, (i, s) in enumerate(self.dense_search(query, k), 1)
-            ]
+            return self.dense_search(query, n)
         if mode == "bm25":
-            return [
-                Hit(self.chunks[i], s, bm25_rank=r)
-                for r, (i, s) in enumerate(self.bm25.search(query, k), 1)
-            ]
+            return self.bm25.search(query, n)
         if mode != "hybrid":
             raise ValueError(f"unknown mode {mode!r}")
-
         dense = [i for i, _ in self.dense_search(query, n)]
         keyword = [i for i, _ in self.bm25.search(query, n)]
-        dense_rank = {i: r for r, i in enumerate(dense, 1)}
-        bm25_rank = {i: r for r, i in enumerate(keyword, 1)}
-        return [
-            Hit(self.chunks[i], score, dense_rank.get(i), bm25_rank.get(i))
-            for i, score in reciprocal_rank_fusion([dense, keyword])[:k]
-        ]
+        return reciprocal_rank_fusion([dense, keyword])[:n]
+
+    def search(
+        self,
+        query: str,
+        mode: str | None = None,
+        k: int | None = None,
+        *,
+        reranker=None,
+        extra_queries: list[str] | None = None,
+    ) -> list[Hit]:
+        """Top-k chunks for `query`.
+
+        extra_queries: other phrasings of the same question (from query rewriting); each is
+            searched and all rankings are fused with reciprocal rank fusion.
+        reranker: a Reranker that re-scores the top TOP_K_CANDIDATES with the original query.
+        """
+        mode = mode or self.settings.retrieval_mode
+        k = k or self.settings.top_k_final
+        n = max(k, self.settings.top_k_candidates) if (reranker or extra_queries) else k
+        if mode == "hybrid":
+            n = max(n, self.settings.top_k_candidates)  # fusion needs a deep list from each
+
+        rankings = [self.first_stage(q, mode, n) for q in [query, *(extra_queries or [])]]
+        if len(rankings) == 1:
+            ranked = rankings[0][:n]
+        else:
+            ranked = reciprocal_rank_fusion([[i for i, _ in r] for r in rankings])[:n]
+
+        if reranker is not None:
+            candidates = [self.chunks[i] for i, _ in ranked]
+            first_rank = {i: r for r, (i, _) in enumerate(ranked, 1)}
+            return [
+                Hit(candidates[j], score, first_stage_rank=first_rank[ranked[j][0]])
+                for j, score in reranker.rerank(query, candidates, k)
+            ]
+        return [Hit(self.chunks[i], score) for i, score in ranked[:k]]
 
     def close(self) -> None:
         self.qdrant.close()

@@ -29,7 +29,11 @@ def chunk(n: int) -> Chunk:
 
 
 class FakeRetriever:
-    def search(self, question, mode=None, k=None):
+    def __init__(self):
+        self.calls = []
+
+    def search(self, question, mode=None, k=None, *, reranker=None, extra_queries=None):
+        self.calls.append({"question": question, "extra_queries": extra_queries})
         return [Hit(chunk(1), 1.0), Hit(chunk(2), 0.5)]
 
     def close(self):
@@ -96,3 +100,17 @@ def test_prompt_numbers_sources_with_citations():
     user = messages[1]["content"]
     assert "[1] Credit Cards, Chapter II, para 1, p. 1\nRule number 1." in user
     assert "[2] Credit Cards" in user and "Question: question?" in user
+
+
+class FakeRewriter:
+    def rewrite(self, question):
+        return ["formal version of " + question]
+
+
+def test_rewritten_queries_are_searched_alongside_the_original():
+    retriever = FakeRetriever()
+    llm = FakeLLM(json.dumps({"found": True, "answer": "A [1].", "citations": [1]}))
+    Answerer(retriever, llm, rewriter=FakeRewriter()).answer("fees on fraud?")
+    assert retriever.calls == [
+        {"question": "fees on fraud?", "extra_queries": ["formal version of fees on fraud?"]}
+    ]

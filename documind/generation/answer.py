@@ -61,13 +61,25 @@ def check_citations(answer: str, listed: list[int], n_sources: int) -> tuple[lis
 
 
 class Answerer:
-    def __init__(self, retriever: Retriever | None = None, llm: LLMClient | None = None):
+    def __init__(
+        self,
+        retriever: Retriever | None = None,
+        llm: LLMClient | None = None,
+        *,
+        reranker=None,
+        rewriter=None,
+    ):
+        """reranker: optional Reranker; rewriter: optional QueryRewriter."""
         self.retriever = retriever or Retriever()
         self.llm = llm or LLMClient()
+        self.reranker, self.rewriter = reranker, rewriter
 
     def answer(self, question: str, mode: str | None = None, k: int | None = None) -> Answer:
         started = time.perf_counter()
-        hits: list[Hit] = self.retriever.search(question, mode, k)
+        extra = self.rewriter.rewrite(question) if self.rewriter else None
+        hits: list[Hit] = self.retriever.search(
+            question, mode, k, reranker=self.reranker, extra_queries=extra
+        )
         retrieval_seconds = time.perf_counter() - started
         chunks = [hit.chunk for hit in hits]
         retrieved = [to_source(n, c) for n, c in enumerate(chunks, 1)]
