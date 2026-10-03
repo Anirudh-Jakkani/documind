@@ -66,6 +66,23 @@ class Retriever:
         self.qdrant = QdrantClient(path=str(paths["qdrant"]))
         self.collection = collection_name(self.strategy, self.settings.embedding_model)
         self._embedder = embedder
+        self._check_index()
+
+    def _check_index(self) -> None:
+        """Vectors and chunks must match one to one, or search returns the wrong text."""
+        rebuild = (
+            f"Rebuild it: uv run python -m documind.index --strategy {self.strategy} "
+            f"(with EMBEDDING_MODEL={self.settings.embedding_model})"
+        )
+        if not self.qdrant.collection_exists(self.collection):
+            raise FileNotFoundError(f"No vector index '{self.collection}'. {rebuild}")
+        vectors = self.qdrant.count(self.collection).count
+        if vectors != len(self.chunks):
+            self.qdrant.close()
+            raise RuntimeError(
+                f"Index out of date: '{self.collection}' has {vectors} vectors but there are "
+                f"{len(self.chunks)} chunks. {rebuild}"
+            )
 
     @property
     def embedder(self) -> Embedder:

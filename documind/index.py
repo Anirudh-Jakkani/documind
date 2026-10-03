@@ -11,7 +11,7 @@ import sys
 import time
 
 from qdrant_client import QdrantClient
-from qdrant_client.models import Distance, PointStruct, VectorParams
+from qdrant_client.models import Distance, PointIdsList, PointStruct, VectorParams
 
 from documind.chunking.chunkers import STRATEGIES, chunk_document, load_parsed, save_chunks
 from documind.config import get_settings
@@ -20,6 +20,21 @@ from documind.retrieval.embedder import Embedder, TokenCounter
 from documind.retrieval.search import collection_name, index_paths
 
 UPSERT_BATCH = 256
+
+
+def remove_stale_points(client: QdrantClient, name: str, n_chunks: int) -> None:
+    stale, offset = [], None
+    while True:
+        points, offset = client.scroll(name, limit=1000, offset=offset, with_payload=False)
+        stale.extend(p.id for p in points if p.id >= n_chunks)
+        if offset is None:
+            break
+    if stale:
+        client.delete(name, points_selector=PointIdsList(points=stale))
+        print(f"  removed {len(stale)} stale vector(s) left from an earlier index")
+    count = client.count(name).count
+    if count != n_chunks:
+        raise RuntimeError(f"{name}: {count} vectors for {n_chunks} chunks")
 
 
 def build(strategy: str, docs: list[dict], count: TokenCounter, embedder: Embedder) -> dict:
@@ -65,6 +80,9 @@ def build(strategy: str, docs: list[dict], count: TokenCounter, embedder: Embedd
                 for i in range(start, min(start + UPSERT_BATCH, len(chunks)))
             ],
         )
+    # On Windows, deleting a local collection can leave old points behind, so remove any
+    # point that doesn't belong to the new chunk list and check the counts match.
+    remove_stale_points(client, name, len(chunks))
     client.close()
 
     sizes = sorted(c.n_tokens for c in chunks)
