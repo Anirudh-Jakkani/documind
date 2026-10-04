@@ -171,10 +171,12 @@ All limits are settings (`RATE_LIMIT_PER_MINUTE`, `ANSWER_CACHE_SIZE`, `REQUEST_
 
 ## Known limitations
 
-- **Wording still matters.** "How long does a wallet company need to keep a record of all the
-  transactions made through their wallets?" is answered (ten years, PPI directions), but "How
-  long must a wallet company keep records of transactions made with its wallets?" is not: its
-  rewrite says "wallet issuers" instead of "PPI issuer", and the paragraph is missed.
+- **Wording still matters, and borderline answers can flip.** "How long does a wallet company
+  need to keep a record of all the transactions made through their wallets?" works on a laptop,
+  but its answer paragraph ranks 4th of 5, and on the hosted app (Linux, different CPU) it falls
+  out of the top 5. Rephrasing it ("How long must a wallet company keep records…") misses even
+  locally, because the rewrite says "wallet issuers" instead of "PPI issuer". The example
+  questions in the app were chosen because their answers rank 1st or 2nd.
 - **Context the user leaves out.** "Can the bank charge me a fee for a transaction I reported
   as fraud?" fails: the rule is in the *credit card* directions ("charges levied on transactions
   disputed as fraud by the cardholder"), and without "credit card" in the question it never

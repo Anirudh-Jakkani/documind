@@ -49,12 +49,11 @@ GEMINI_API_KEY = "your-key-from-aistudio.google.com"
 Running locally: put `GEMINI_API_KEY=...` in the `.env` file."""
 
 RESULTS = ROOT / "eval" / "results"
-EXAMPLES = [  # everyday wording, each checked against the live app
+EXAMPLES = [  # everyday wording; each answer ranks 1st or 2nd, so it holds on any machine
     "How much money can I send abroad in a year under LRS?",
-    "How long does a wallet company need to keep a record of all the transactions made "
-    "through their wallets?",
     "If my fixed deposit matures on a holiday, how is interest paid for the extra days?",
     "Can the bank force me to use their mobile app just to get a debit card?",
+    "What happens if my savings account falls below the minimum balance?",
     "What is the RBI's current repo rate?",
 ]
 
