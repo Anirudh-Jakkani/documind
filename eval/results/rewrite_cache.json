@@ -1,0 +1,818 @@
+{
+ "Can a bank charge fees on a transaction the customer reported as fraud?": [
+  "liability of customer unauthorized electronic banking transactions",
+  "charges levied on fraudulent transactions reported by customer"
+ ],
+ "Who is required to keep records of the information or documentation on which a foreign exchange transaction was undertaken?": [
+  "maintenance of records of foreign exchange transactions",
+  "preservation of information and documentation foreign exchange operations"
+ ],
+ "How much can a resident individual lend to a non-resident relative under LRS in a financial year?": [
+  "resident individual rupee loan non resident relative Liberalised Remittance Scheme limit financial year",
+  "LRS remittance non resident relative resident individual maximum amount"
+ ],
+ "What is the maximum amount a resident individual can remit under the Liberalised Remittance Scheme in a financial year?": [
+  "Liberalised Remittance Scheme limit resident individual financial year",
+  "maximum permissible remittance under LRS financial year"
+ ],
+ "What is the maximum amount a non‑individual entity can remit for donations without needing RBI prior approval?": [
+  "Liberalised Remittance Scheme non-individual entities donation limit RBI approval",
+  "remittance for donations by non-individual resident entities prior RBI approval"
+ ],
+ "Is prior approval from the Government of India required for foreign exchange drawals if the payment is made from a Resident Foreign Currency (RFC) account?": [
+  "Resident Foreign Currency RFC account foreign exchange drawal approval",
+  "foreign exchange drawals prior approval Government of India"
+ ],
+ "Under FEMA, from how many residential properties in India can a non-resident repatriate the sale proceeds?": [
+  "repatriation of sale proceeds residential property non-resident FEMA",
+  "limit on number of residential properties sale proceeds repatriation NRI"
+ ],
+ "Under RBI's foreign exchange rules on deposits and accounts, for how long can an escrow account be kept open at most?": [
+  "maximum tenure of escrow account foreign exchange",
+  "permissible validity period for maintaining escrow account RBI regulations"
+ ],
+ "What actions is a resident Power of Attorney holder not allowed to perform with an NRE account?": [
+  "Non-Resident External (NRE) account Power of Attorney permitted operations",
+  "NRE account restrictions Power of Attorney holder resident"
+ ],
+ "Can balances in a resident foreign currency (domestic) account be used for current or capital account transactions?": [
+  "Resident Foreign Currency Domestic RFC D account permitted debits current account transactions",
+  "Resident Foreign Currency Domestic RFC D account capital account transactions eligibility"
+ ],
+ "Under the Money Transfer Service Scheme (MTSS), how often must Indian Agents carry out spot audits of their Sub Agents?": [
+  "Money Transfer Service Scheme MTSS spot audit frequency Indian Agents Sub Agents",
+  "MTSS guidelines spot audit requirement of Sub Agents by Indian Agents"
+ ],
+ "Under the Money Transfer Service Scheme (MTSS), how often must Indian Agents carry out due diligence checks on their Sub Agents?": [
+  "Money Transfer Service Scheme (MTSS) due diligence Indian Agents Sub Agents frequency",
+  "periodic due diligence checks Sub Agents Indian Agents MTSS guidelines"
+ ],
+ "What is the maximum investment allowed for a micro enterprise under the MSMED Act?": [
+  "definition of micro enterprise investment limit MSMED Act",
+  "maximum investment in plant and machinery micro enterprise MSME"
+ ],
+ "Under RBI's foreign investment rules, what is the minimum price at which convertible instruments can be converted into shares?": [
+  "pricing guidelines for conversion of convertible instruments into equity shares foreign investment",
+  "minimum price conversion of convertible instruments RBI FEMA regulations"
+ ],
+ "What constitutes an 'Indirect Foreign Investment' under RBI's Foreign Investment in India regulations?": [
+  "definition of indirect foreign investment foreign exchange management non debt instruments rules",
+  "calculation of indirect foreign investment foreign portfolio investment resident indian entities"
+ ],
+ "Which two regulations framed under FEMA govern External Commercial Borrowings and Trade Credit?": [
+  "Foreign Exchange Management External Commercial Borrowings Regulations",
+  "Foreign Exchange Management Trade Credits Regulations"
+ ],
+ "When a non-resident provides credit enhancement for a rupee debt instrument, what minimum average maturity must the underlying debt have?": [
+  "credit enhancement rupee debt instrument non-resident minimum average maturity",
+  "external commercial borrowings credit enhancement average maturity requirement"
+ ],
+ "How can a non‑resident guarantor satisfy the liability under a guarantee for a rupee facility?": [
+  "non-resident guarantor liability rupee facility fulfillment",
+  "invocation of guarantee by non-resident foreign exchange management"
+ ],
+ "For how long must a PPI issuer keep a log of all transactions made using its PPIs?": [
+  "Prepaid Payment Instruments PPI transaction log retention period",
+  "PPI issuer transaction history preservation maintenance duration"
+ ],
+ "In the Bharat Bill Payment System, what is an Agent Institution?": [
+  "Bharat Bill Payment System Agent Institution definition",
+  "BBPS framework Agent Institution guidelines"
+ ],
+ "What are the three components of the tiered structure in the Bharat Bill Payment System?": [
+  "Bharat Bill Payment System tiered structure components",
+  "BBPOU operating units Bharat Bill Payment Central Unit Bharat Bill Payment Operating Units"
+ ],
+ "In the Bharat Bill Payment System, what credits and debits are allowed in the escrow account of a Customer Operating Unit (COU)?": [
+  "Bharat Bill Payment System Customer Operating Unit escrow account permitted credits debits",
+  "BBPS COU escrow account operational guidelines transactions"
+ ],
+ "For an overseas investment in an IFSC, how long does the financial services regulator have to decide on the approval?": [
+  "Overseas Investment IFSC financial services regulator approval timeline",
+  "timeline for approval of overseas investment in International Financial Services Centre"
+ ],
+ "What is a subsidiary or step‑down subsidiary of a foreign entity according to the RBI guidelines?": [
+  "definition of subsidiary of a foreign entity RBI",
+  "step-down subsidiary foreign entity guidelines"
+ ],
+ "What is the maximum loan amount a bank can lend to an SHG or JLG for activities other than agriculture or MSME?": [
+  "maximum loan amount Self Help Group SHG non-farm activities",
+  "credit limit Joint Liability Group JLG non-agriculture MSME"
+ ],
+ "Under RBI's Payment Aggregator directions, on what principle must access to applications be granted?": [
+  "Payment Aggregators application access security principle",
+  "Master Directions on Payment Aggregators secure access framework"
+ ],
+ "What is the minimum net‑worth required for a payment aggregator at the time of application and by the end of the third financial year after authorization?": [
+  "Payment Aggregator minimum net worth requirement at application",
+  "Payment Aggregator net worth timeline end of third financial year"
+ ],
+ "Does an acquiring bank have to conduct customer due diligence on merchants acquired through a non-bank payment aggregator?": [
+  "merchant onboarding customer due diligence payment aggregator",
+  "acquiring bank merchant KYC obligations non-bank payment aggregator"
+ ],
+ "By when must payment system providers comply with RBI's directions on authentication mechanisms for digital payments?": [
+  "payment system providers timeline compliance digital payment authentication mechanisms",
+  "implementation deadline authentication framework digital payment system providers"
+ ],
+ "Who reviews a bank’s green deposit initiatives?": [
+  "green deposit framework assurance review",
+  "green deposits monitoring and independent evaluation"
+ ],
+ "Which types of vendors and entities are explicitly excluded from being considered as Service Providers under this RBI chapter?": [
+  "entities excluded from service providers RBI master direction",
+  "service provider exclusions commercial banks guidelines"
+ ],
+ "What factors does the RBI use to determine the materiality of an outsourcing arrangement for a bank?": [
+  "materiality assessment criteria for outsourcing arrangements",
+  "factors determining material outsourcing of financial services by commercial banks"
+ ],
+ "What charges must a bank disclose when a borrower switches a floating rate loan to a fixed rate?": [
+  "interest rate switch charges floating to fixed rate disclosure",
+  "prevailing charges on switchover of loan from floating to fixed interest rate"
+ ],
+ "What does the term \"Bank Rate\" refer to?": [
+  "Bank Rate definition RBI Act",
+  "Bank Rate monetary policy instrument"
+ ],
+ "How long does a bank have to wait after notifying a customer about a minimum balance shortfall before it can levy penal charges?": [
+  "minimum balance shortfall notice period penal charges",
+  "charges for non-maintenance of minimum balance prior intimation"
+ ],
+ "What are the four key elements that a bank's KYC policy must include?": [
+  "customer due diligence policy key elements",
+  "know your customer framework minimum requirements"
+ ],
+ "What is the maximum period a customer can present cheques, drafts, pay orders or banker’s cheques for payment?": [
+  "validity period for presentation of cheques drafts pay orders bankers cheques",
+  "maximum period for encashment of cheque pay order banker cheque"
+ ],
+ "What must a borrower do if a person on the list of wilful defaulters is on its board or in charge of its management?": [
+  "wilful defaulter board of directors restrictions borrower compliance",
+  "entities with wilful defaulters in management obligations"
+ ],
+ "What is the monetary threshold that must be crossed for a bank to stop reporting a wilful defaulter after a transfer?": [
+  "wilful defaulter monetary threshold reporting",
+  "transfer of borrower accounts wilful defaulter criteria"
+ ],
+ "When does a revolving facility such as cash credit default?": [
+  "cash credit facility default classification",
+  "revolving credit facility asset classification norm"
+ ],
+ "What is exempted when a bank acquires non‑SLR securities through debt conversion?": [
+  "non-SLR securities debt conversion exemption Reserve Bank of India",
+  "acquisition of non-SLR securities through conversion of debt statutory liquidity ratio exemption"
+ ],
+ "Is a bank allowed to voluntarily set higher provision rates for NPAs?": [
+  "prudential norms on income recognition asset classification and provisioning provisioning coverage ratio",
+  "banks discretion to make higher provisions on non performing assets"
+ ],
+ "If a bank acquires a Specified Non‑Financial Asset (SNFA) and has already recognized some interest income from that SNFA before the acquisition date, what must the bank do with that income after the acquisition?": [
+  "Specified Non Financial Asset SNFA interest income accounting treatment acquisition",
+  "accounting of interest income recognized prior to acquisition of Specified Non Financial Asset"
+ ],
+ "How can a bank integrate liquidity costs and benefits into its strategy planning?": [
+  "integration of liquidity costs and benefits in strategic planning",
+  "funds transfer pricing mechanism for liquidity cost allocation"
+ ],
+ "What are the six operational elements a bank should include in its intraday liquidity risk management strategy?": [
+  "intraday liquidity risk management operational elements",
+  "framework for intraday liquidity management strategy commercial banks"
+ ],
+ "Can a bank grant a fixed‑rate loan before April 1, 2016 with an interest rate below the Base Rate at the time of sanction or renewal?": [
+  "fixed rate loans sanctioned below base rate prior to April 1 2016",
+  "renewal of fixed rate loans below base rate transition guidelines"
+ ],
+ "How many Base Rates can a bank have?": [
+  "Base Rate methodology guidelines commercial banks",
+  "multiple Base Rates benchmark interest rate RBI"
+ ],
+ "When a bank prices a loan, can the business strategy component of the spread be negative?": [
+  "marginal cost of funds based lending rate (mblr) spread business strategy",
+  "loan pricing components negative spread commercial banks"
+ ],
+ "For residential mortgage-backed securitisations, what is the minimum reserve floor when releasing excess credit enhancement?": [
+  "residential mortgage backed securitisation minimum holding period excess credit enhancement",
+  "securitisation of standard assets release of excess credit enhancement minimum reserve floor"
+ ],
+ "How many days before a securitisation comes into effect must the originator assess the credit claims or receivables conditions?": [
+  "securitisation credit claims receivables conditions assessment timeline originator",
+  "due diligence credit risk securitisation transaction effective date"
+ ],
+ "What events can trigger the termination of the replenishment period in a securitisation?": [
+  "securitisation replenishment period termination events",
+  "termination of replenishment period in securitisation transactions"
+ ],
+ "What is the maximum single group entity exposure limit for regulated financial services companies?": [
+  "single borrower exposure limit regulated financial services companies",
+  "group entity exposure ceiling commercial banks"
+ ],
+ "At what levels does a commercial bank need to apply the Large Exposures Framework (LEF)?": [
+  "Large Exposures Framework applicability commercial banks",
+  "Large Exposures Framework levels of application banking regulation"
+ ],
+ "What is the maximum additional exposure a bank can have beyond the regulatory prescribed ceiling for a single counterparty?": [
+  "maximum additional exposure single counterparty regulatory prescribed ceiling",
+  "large exposures framework additional tier beyond statutory limit counterparty"
+ ],
+ "Under what circumstances must a bank seek prior approval from the Reserve Bank before remitting a debt owed to it by a director or related firm?": [
+  "prior approval Reserve Bank debt remission director related firm",
+  "write-off debt director related party prior approval commercial banks"
+ ],
+ "What percentage of paid‑up equity share capital must a person own to be considered a related person of a bank?": [
+  "substantial interest paid-up equity share capital bank",
+  "related person definition equity share capital holding bank"
+ ],
+ "Once a complaint about credit information is resolved, within how many working days must compensation be credited to the complainant's bank account?": [
+  "credit information report complaint resolution compensation timeline",
+  "credit information company compensation credit timeframe working days"
+ ],
+ "What information must a card issuer include on the one‑page Key Fact Statement sent with a credit card application?": [
+  "Key Fact Statement credit card application mandatory disclosures",
+  "credit card Key Fact Statement information requirements RBI"
+ ],
+ "Is a card‑issuer allowed to partner with more than one co‑branding partner for a single card?": [
+  "co-branded debit credit card multiple partners guidelines",
+  "co-branding arrangement card-issuer restrictions RBI"
+ ],
+ "How can a cardholder report an unauthorised transaction and initiate the blocking of the card?": [
+  "reporting unauthorised electronic banking transactions grievance redressal",
+  "blocking of payment card hotlisting procedure"
+ ],
+ "Which type of units are eligible for rupee pre-shipment export credit under the scheme when they supply goods to another unit for export purposes?": [
+  "rupee pre-shipment export credit eligible units",
+  "deemed exports pre-shipment credit eligibility"
+ ],
+ "Is there a fixed maximum quantity of gold a bank can lend to one borrower under the Gold Monetization (GML) scheme?": [
+  "Gold Monetization Scheme GML individual borrower limit",
+  "maximum quantity of gold lending per borrower Gold Monetization Scheme"
+ ],
+ "What minimum percentage of ownership must an Indian company hold in a joint venture to qualify for fund‑based facilities from a bank?": [
+  "equity holding Indian company joint venture fund based facilities",
+  "minimum percentage ownership joint venture credit facilities"
+ ],
+ "Will a penalty be imposed if I withdraw my NRE term deposit early to convert it into an RFC account?": [
+  "premature withdrawal penalty NRE term deposit",
+  "conversion NRE deposit to RFC account penalty"
+ ],
+ "If an FCNR(B) deposit is renewed within 14 days after it matures, what interest rate applies to the renewed deposit?": [
+  "FCNR(B) deposit renewal overdue maturity interest rate",
+  "Foreign Currency Non-Resident Bank deposit rollover rate within 14 days"
+ ],
+ "If a term deposit matures on a non-business working day, how is interest paid for that day?": [
+  "term deposit maturity non business working day interest payment",
+  "interest calculation holiday maturity overdue deposit"
+ ],
+ "Is collateral posted by a clearing member and held by a bankruptcy‑remote custodian subject to a capital requirement for counterparty credit risk exposure?": [
+  "capital requirement counterparty credit risk clearing member collateral bankruptcy-remote custodian",
+  "exposure norms margin collateral held by custodian capital adequacy"
+ ],
+ "What are the key conditions that a capital instrument must satisfy to be classified as Common Equity Tier 1 (CET1) capital for a foreign bank operating in India?": [
+  "Common Equity Tier 1 CET1 capital eligibility criteria foreign banks",
+  "qualifying criteria for capital instruments as CET1 capital India"
+ ],
+ "What is the maximum percentage of a bank's NDTL that it can borrow from the Marginal Standing Facility scheme?": [
+  "Marginal Standing Facility (MSF) borrowing limit percentage of NDTL",
+  "MSF limit scheduled commercial banks NDTL"
+ ],
+ "What penalty must a bank pay if it fails to maintain the required SLR on any day?": [
+  "Statutory Liquidity Ratio (SLR) maintenance default penal interest",
+  "penal interest for shortfall in SLR maintenance"
+ ],
+ "What is the role of a Non‑Executive Director (NED) in a Private‑Sector Bank (PVB) regarding decision‑making and communication with staff?": [
+  "role of Non-Executive Director in Private Sector Bank decision-making",
+  "Non-Executive Director communication with staff in Private Sector Bank"
+ ],
+ "What must a director disclose to the Board regarding his or her other directorships and interests in other entities?": [
+  "disclosure of interest by directors",
+  "disclosure of other directorships to the Board"
+ ],
+ "What must a bank submit with its application to offer a transactional digital banking facility?": [
+  "digital banking unit application requirements commercial banks",
+  "transactional digital banking facility approval submission documents"
+ ],
+ "What banking services can a customer access through a view‑only banking facility on digital channels?": [
+  "view-only banking facility digital channels services",
+  "internet banking read-only access permissible operations"
+ ],
+ "Is a bank allowed to make it mandatory for a customer to use a specific digital banking channel in order to obtain a debit card?": [
+  "mandatory use of specific digital banking channel for debit card issuance",
+  "restrictive conditions for debit card issuance Reserve Bank of India"
+ ],
+ "When do the Reserve Bank of India (Commercial Banks - Internal Ombudsman) Directions, 2026, come into force?": [
+  "Reserve Bank of India Commercial Banks Internal Ombudsman Directions 2026 date of commencement",
+  "Internal Ombudsman for Commercial Banks Directions 2026 effective date"
+ ],
+ "Within how many working days must a bank submit the details of its appointed Internal Ombudsman to the RBI?": [
+  "Internal Ombudsman appointment details submission timeline RBI",
+  "Reporting timeline for appointment of Internal Ombudsman to Reserve Bank of India"
+ ],
+ "What does the term \"Dividend Payout Ratio\" mean in the RBI regulations?": [
+  "Dividend Payout Ratio definition commercial banks",
+  "regulatory guidelines on Dividend Payout Ratio for banks"
+ ],
+ "How is Adjusted Profit After Tax (PAT) calculated for dividend purposes?": [
+  "computation of adjusted net profit for dividend payout",
+  "eligible profit after tax for declaration of dividend by commercial banks"
+ ],
+ "What factors must the Board of Directors consider when deciding to declare a dividend or remit profit?": [
+  "Board of Directors dividend declaration policy factors commercial banks",
+  "profit remittance eligibility criteria financial institutions RBI regulation"
+ ],
+ "For card e-mandates on recurring payments, up to what amount per transaction can payments go through without an additional factor of authentication (AFA)?": [
+  "e-mandate recurring payments additional factor of authentication limit",
+  "card based e-mandates transaction limit without AFA"
+ ],
+ "Can a customer change the validity period of an e‑mandate after it has been registered?": [
+  "modification of e-mandate validity period",
+  "alteration of standing instruction parameters"
+ ],
+ "If a payment system operator cannot extinguish its liabilities, what steps must it take within the specified period after cancellation of its Certificate of Authority?": [
+  "extinguishment of liabilities payment system operator Certificate of Authorisation cancellation",
+  "unclaimed balances escrow account payment system operator revocation of authorisation"
+ ],
+ "What items are considered when calculating an entity’s net‑worth for RBI payment‑system authorisation?": [
+  "computation of net worth for payment system operator authorisation",
+  "eligible items included in net worth calculation RBI guidelines"
+ ],
+ "When can a financial institution or mutual fund be considered a promoter group if it holds ten percent or more of a promoter’s equity share capital?": [
+  "promoter group classification financial institution mutual fund equity share capital threshold",
+  "ten percent equity holding promoter group inclusion criteria commercial banks financial institutions"
+ ],
+ "What is the maximum duration for long duration crops under the KCC Scheme?": [
+  "Kisan Credit Card (KCC) scheme long duration crops maximum period",
+  "repayment period long term crops Kisan Credit Card"
+ ],
+ "Within how many days must a bank complete the classification of a red‑flagged account as fraud or remove its red‑flagged status?": [
+  "time limit for classification of red flagged account as fraud",
+  "period for review and removal of red flagged account status by banks"
+ ],
+ "How many days does a bank have to report a red flagged account with an aggregate exposure of ₹3 crore or more to the RBI’s CRILC platform?": [
+  "reporting timeline red flagged account CRILC aggregate exposure Rs 3 crore",
+  "time limit reporting fraud red flag account Central Repository of Information on Large Credits"
+ ],
+ "Which payment card security standards, in addition to PCI‑DSS and PCI‑SSF, must a bank follow when issuing cards?": [
+  "payment card security standards card issuing compliance",
+  "additional security requirements for debit credit card issuance"
+ ],
+ "How often must a bank run vulnerability assessments on its digital payment applications and infrastructure?": [
+  "vulnerability assessment frequency digital payment applications",
+  "cyber security framework vulnerability assessment infrastructure commercial banks"
+ ],
+ "What happens to sensitive customer information when a user exits a bank’s mobile application?": [
+  "customer data retention and deletion mobile banking application",
+  "privacy policy sensitive information handling uninstallation mobile app bank"
+ ],
+ "What responsibilities does the CSOC have in incident management and forensic analysis?": [
+  "CSOC responsibilities cyber security incident management commercial banks",
+  "Cyber Security Operations Centre forensic analysis guidelines RBI"
+ ],
+ "What inventory must a bank maintain for devices on its network?": [
+  "IT asset inventory requirements for banking networks",
+  "inventory management of network devices commercial banks"
+ ],
+ "What steps must a bank take regarding outdated hardware or software?": [
+  "end-of-life hardware software risk management guidelines",
+  "IT infrastructure obsolescence policy commercial banks"
+ ],
+ "If I have a minimum-details PPI wallet, by when must it be converted to full KYC, and can I link it to UPI before that?": [
+  "minimum-details prepaid payment instrument conversion full KYC timeline",
+  "UPI linking minimum-details PPI wallet KYC compliance"
+ ],
+ "In the Bharat Bill Payment System, who handles clearing and settlement, and where must a non-bank operating unit keep the funds?": [
+  "Bharat Bill Payment System clearing and settlement entity",
+  "non bank operating unit escrow account escrow requirement"
+ ],
+ "By when must payment system providers comply with RBI's 2025 authentication directions, and what later deadline applies to card issuers for cross-border card-not-present transactions?": [
+  "Payment System Providers timeline for compliance with Reserve Bank of India 2025 authentication directions",
+  "Card issuers deadline for cross-border card-not-present transactions authentication"
+ ],
+ "How much money can I send abroad in a year under LRS, and can I use it to buy a property abroad?": [
+  "Liberalised Remittance Scheme annual limit",
+  "acquisition of immovable property abroad under LRS"
+ ],
+ "A bank activated a credit card I never asked for and billed me. What must it do, and am I responsible if that card is misused?": [
+  "unsolicited credit card issuance charges levied",
+  "liability of customer for fraudulent misuse of unsolicited credit card"
+ ],
+ "If my savings account falls below the minimum balance, how long does the bank give me before charging, and how must the charge be calculated?": [
+  "savings account minimum balance non-maintenance charges notice period",
+  "minimum balance shortfall charges levy methodology commercial banks"
+ ],
+ "If an unauthorised electronic transaction happens on my account because of a breach elsewhere in the system, what is my liability if I report it within three working days, and what if I report it within five?": [
+  "customer liability unauthorized electronic banking transaction reporting timeline",
+  "zero liability limited liability third party breach electronic transactions"
+ ],
+ "If I dispute a credit card transaction as fraud, can the bank charge me while it investigates, and how quickly must I report an unauthorised transaction to have zero liability when the fault lies elsewhere in the system?": [
+  "credit card fraudulent transaction charge levy during investigation",
+  "unauthorised electronic banking transactions zero liability reporting timeline"
+ ],
+ "Can the bank charge me a fee for a transaction I reported as fraud?": [
+  "liability of customer unauthorized electronic banking transactions charges",
+  "compensation and charges fraudulent transactions reporting commercial banks"
+ ],
+ "Who needs to keep the paperwork and records for an international money transfer I made?": [
+  "cross border wire transfer record keeping requirements",
+  "preservation of records international remittance authorised dealer"
+ ],
+ "How much money can I send to a relative abroad under LRS in a financial year?": [
+  "Liberalised Remittance Scheme (LRS) limit financial year",
+  "remittance to relative abroad LRS maximum amount"
+ ],
+ "How much money can I send abroad under LRS in a financial year?": [
+  "Liberalised Remittance Scheme LRS limit financial year",
+  "maximum permissible limit outward remittance resident individual"
+ ],
+ "How much can a company or organization send abroad for donations before they need approval from the RBI?": [
+  "Liberalised Remittance Scheme corporate donations limit RBI approval",
+  "outward remittance by corporates for donations regulatory limit"
+ ],
+ "Do I need government approval to buy foreign exchange if I'm paying out of my Resident Foreign Currency account?": [
+  "Resident Foreign Currency account foreign exchange withdrawal regulations",
+  "foreign exchange acquisition approval requirements Resident Foreign Currency account"
+ ],
+ "Under FEMA rules, how many houses or flats in India can an NRI sell and send the money abroad?": [
+  "repatriation of sale proceeds of immovable property NRI FEMA",
+  "sale of residential commercial property by Non-Resident Indian remittance limit"
+ ],
+ "Under RBI rules, what's the maximum time an escrow account can stay open?": [
+  "maximum validity period of escrow account",
+  "time limit for operation of escrow account"
+ ],
+ "What things is a resident power of attorney holder not allowed to do with an NRE account?": [
+  "Non-Resident External (NRE) account Power of Attorney permitted operations",
+  "Resident power of attorney holder restrictions NRE account"
+ ],
+ "Can I use the money in my Resident Foreign Currency account for regular or overseas transactions?": [
+  "Resident Foreign Currency (RFC) account permitted debits",
+  "utilization of funds in Resident Foreign Currency account for overseas transactions"
+ ],
+ "How often do Indian Agents need to do spot checks on their Sub Agents under MTSS?": [
+  "Money Transfer Service Scheme spot checks sub agents frequency",
+  "Indian Agent inspection schedule sub agents MTSS"
+ ],
+ "How often do Indian Agents need to do background checks on their Sub Agents under MTSS?": [
+  "Money Transfer Service Scheme Indian Agent due diligence sub agent background check frequency",
+  "MTSS guidelines Indian Agents periodic screening sub agents"
+ ],
+ "How much maximum can a micro business invest under the MSMED Act?": [
+  "investment limit micro enterprise MSMED Act",
+  "maximum investment plant and machinery micro enterprise"
+ ],
+ "Under RBI's foreign investment rules, what is the lowest price at which convertible instruments can be turned into shares?": [
+  "pricing guidelines for conversion of convertible instruments into equity shares under foreign exchange management regulations",
+  "minimum price for conversion of compulsorily convertible debentures (CCD) under Foreign Exchange Management (Non-Debt Instruments) Rules"
+ ],
+ "What counts as an indirect foreign investment according to RBI rules?": [
+  "indirect foreign investment calculation criteria",
+  "foreign direct investment downstream investment guidelines"
+ ],
+ "Which two FEMA rules cover External Commercial Borrowings and Trade Credit?": [
+  "Foreign Exchange Management Borrowing and Lending Regulations External Commercial Borrowings",
+  "Foreign Exchange Management Trade Credits Regulations"
+ ],
+ "What's the minimum average maturity needed for a rupee debt instrument when a non-resident provides credit enhancement for it?": [
+  "minimum average maturity rupee debt instrument non resident credit enhancement",
+  "external commercial borrowings credit enhancement minimum maturity"
+ ],
+ "How can someone living abroad pay off a loan they guaranteed in rupees?": [
+  "repayment of rupee loan guarantee by non-resident",
+  "remittance from abroad for loan liability discharge"
+ ],
+ "How long does a wallet company need to keep a record of all the transactions made through their wallets?": [
+  "Prepaid Payment Instruments transaction data preservation period",
+  "PPI issuer transaction log maintenance requirement"
+ ],
+ "What is an Agent Institution in the Bharat Bill Payment System?": [
+  "Agent Institution Bharat Bill Payment System BBPS definition",
+  "roles and responsibilities of Agent Institution BBPS"
+ ],
+ "How does the three-tier system work in the Bharat Bill Payment System?": [
+  "Bharat Bill Payment System three-tier structure operational framework",
+  "BBPOU operating units central unit operating units agent institutions hierarchy"
+ ],
+ "In the Bharat Bill Payment System, what kind of money goes in and out of a Customer Operating Unit's escrow account?": [
+  "Bharat Bill Payment System Customer Operating Unit escrow account debits credits",
+  "BBPS COU escrow account inflows and outflows"
+ ],
+ "How long does it take for the financial regulator to approve an overseas investment in an IFSC?": [
+  "overseas direct investment approval timeline IFSC Reserve Bank of India",
+  "financial sector regulator processing time outbound investment International Financial Services Centre"
+ ],
+ "What does RBI mean by a subsidiary or step-down subsidiary of a foreign company?": [
+  "subsidiary of a foreign company definition RBI",
+  "step-down subsidiary regulation Reserve Bank of India"
+ ],
+ "How much maximum loan can the bank give to an SHG or JLG for things other than farming or MSME?": [
+  "Self Help Group (SHG) bank linkage loan limit non farm",
+  "Joint Liability Group (JLG) credit limit non farm MSME"
+ ],
+ "According to RBI's rules for payment aggregators, on what basis should access to apps be given?": [
+  "payment aggregator onboarding merchant application access criteria",
+  "payment aggregator security guidelines for application access"
+ ],
+ "How much net worth do we need to have when applying to be a payment aggregator, and what does it need to grow to by the end of our third year after getting approved?": [
+  "Payment Aggregator net worth eligibility criteria",
+  "Payment Aggregator net worth timeline third year"
+ ],
+ "Does the bank that signs up merchants need to check their background even if they come through a third-party payment company?": [
+  "merchant onboarding due diligence background check payment aggregator",
+  "third party merchant acquisition compliance guidelines commercial banks"
+ ],
+ "By when do digital payment companies need to follow the RBI's new rules for logging in and approving payments?": [
+  "digital payment security controls implementation timeline RBI",
+  "additional factor of authentication implementation deadline PPI issuers"
+ ],
+ "Who checks the bank's green deposit projects?": [
+  "green deposits third party verification assurance framework",
+  "allocation of green deposits impact assessment audit"
+ ],
+ "Which types of businesses and organizations are not allowed to be service providers under this RBI chapter?": [
+  "ineligible entities service providers restrictions",
+  "prohibited business types agent exclusion criteria"
+ ],
+ "How does the RBI decide if a bank's outsourcing deal is considered big or important enough?": [
+  "material outsourcing risk assessment guidelines commercial banks",
+  "criteria for important or material outsourcing arrangements RBI"
+ ],
+ "What fees do I have to be told about when changing my floating rate loan to a fixed rate?": [
+  "floating to fixed rate loan conversion charges disclosure",
+  "foreclosure charges and administrative fees interest rate reset"
+ ],
+ "What is a bank rate?": [
+  "Definition of Bank Rate Reserve Bank of India Act",
+  "Bank Rate monetary policy instrument Reserve Bank of India"
+ ],
+ "How soon after notifying me about a low balance can the bank start charging me penalty fees?": [
+  "minimum balance non-maintenance charges notice period",
+  "levy of charges for non-maintenance of minimum balance timeline"
+ ],
+ "What are the four main things that need to be in a bank's KYC policy?": [
+  "Customer Due Diligence (CDD) policy elements",
+  "key components of Know Your Customer (KYC) policy commercial banks"
+ ],
+ "How long do I have to deposit a cheque, draft, or pay order before it expires?": [
+  "validity period of cheques drafts pay orders",
+  "presentation of instruments for payment time limit"
+ ],
+ "What do we need to do if someone on the wilful defaulters list is on our board or managing the company?": [
+  "wilful defaulters restrictions on board of directors",
+  "removal of wilful defaulter from management position"
+ ],
+ "How much money does a transfer have to be over before the bank stops reporting someone as a wilful defaulter?": [
+  "wilful defaulter threshold amount",
+  "criteria for classification as wilful defaulter"
+ ],
+ "When does a cash credit or revolving line of credit actually go into default?": [
+  "classification of cash credit revolving line of credit as non-performing asset default",
+  "when does revolving credit facility default asset classification RBI guidelines"
+ ],
+ "What gets exempted when a bank takes over non-SLR securities through debt conversion?": [
+  "exemption non-SLR securities conversion into debt equity",
+  "prudential norms debt conversion non-SLR securities statutory liquidity ratio"
+ ],
+ "Can a bank choose to keep extra money aside for bad loans than what's required?": [
+  "banks maintaining higher provision for non-performing assets than regulatory requirement",
+  "prudential norms on income recognition asset classification and provisioning floating provisions"
+ ],
+ "If our bank takes over a Specified Non-Financial Asset and we already recorded some interest income on it before taking it over, what are we supposed to do with that income now?": [
+  "accounting treatment of interest income on Specified Non-Financial Asset (SNFA) acquired",
+  "appropriation of interest income recorded prior to takeover of Specified Non-Financial Asset (SNFA)"
+ ],
+ "How do we factor the cost and value of our cash and funding into our business planning?": [
+  "cost of cash management liquidity funding cost business planning commercial banks",
+  "fund transfer pricing cost of funds asset liability management guidelines"
+ ],
+ "What are the six things a bank needs to include in its strategy for managing intraday liquidity risk?": [
+  "intraday liquidity management strategy core elements",
+  "intraday liquidity risk management framework components"
+ ],
+ "Can a bank give a fixed-rate loan before April 1, 2016, with an interest rate lower than the Base Rate at the time it was approved or renewed?": [
+  "fixed rate loans below base rate prior to April 1 2016",
+  "charging interest rate lower than base rate sanctioned or renewed"
+ ],
+ "How many different base rates is a bank allowed to have?": [
+  "Base Rate methodology guidelines commercial banks",
+  "multiple Base Rates prohibition RBI"
+ ],
+ "When a bank sets a loan rate, can the business strategy part of the spread end up being negative?": [
+  "benchmark rate spread business strategy negative",
+  "marginal cost of funds based lending rate spread components"
+ ],
+ "When releasing extra credit enhancement for home loan securitizations, what's the minimum reserve floor?": [
+  "credit enhancement release minimum reserve floor securitisation",
+  "maintenance of minimum excess interest spread credit enhancement home loan securitisation"
+ ],
+ "How many days before a loan sell-off takes effect does the lender need to check the status of the receivables?": [
+  "assignment of loans due diligence receivables status",
+  "loan sell down timeline verification of receivables"
+ ],
+ "What causes the replenishment period in a securitisation to end early?": [
+  "securitisation transaction replenishment period early amortization triggers",
+  "master direction securitisation of standard assets reset termination criteria"
+ ],
+ "What's the maximum single group entity exposure limit for regulated financial services companies?": [
+  "single borrower exposure limit regulated financial services entities",
+  "group entity exposure ceiling commercial banks"
+ ],
+ "At what loan or funding size does our bank need to follow the Large Exposures Framework rules?": [
+  "Large Exposures Framework applicability threshold loan size",
+  "specified limit for Large Exposures Framework commercial banks"
+ ],
+ "How much extra money can the bank lend to just one customer over the official regulatory limit?": [
+  "Large Exposures Framework aggregate exposure limit excess lending",
+  "prudential exposure ceiling single borrower limit discretionary limit"
+ ],
+ "When does the bank need RBI's okay before writing off a loan given to a director or their company?": [
+  "prior approval Reserve Bank of India write-off credit facilities directors",
+  "compromise settlement write-off dues directors relatives companies RBI permission"
+ ],
+ "How much of a bank's equity shares do I need to own for the bank to consider me a related person?": [
+  "substantial acquisition of shares voting rights commercial banks significant influence",
+  "identification of related party bank directors relatives major shareholders"
+ ],
+ "Once my credit report complaint is sorted out, how many working days does it take for the compensation to actually hit my bank account?": [
+  "credit information company resolution timeline compensation credit",
+  "credit report grievance redressal compensation payout time frame"
+ ],
+ "What details are supposed to be on the one-page Key Fact Statement that comes with a credit card application?": [
+  "Key Fact Statement credit card application mandatory disclosures",
+  "credit card Key Fact Statement one-page format details RBI"
+ ],
+ "Can a bank tie up with more than one brand for the same credit card?": [
+  "co-branded credit card tie-up multiple partners restrictions",
+  "credit card issuance partnership guidelines commercial banks"
+ ],
+ "How do I block my credit card and report a transaction I didn't make?": [
+  "credit card blocking procedure unauthorized transaction reporting",
+  "liability of customer unauthorized electronic banking transactions reporting"
+ ],
+ "Can I get rupee pre-shipment export credit if I supply goods to another company that is exporting them?": [
+  "pre-shipment export credit in Indian Rupees deemed exports",
+  "rupee pre-shipment credit to indirect exporters"
+ ],
+ "Is there a limit on how much gold a bank can lend to a single borrower under the Gold Monetization Scheme?": [
+  "Gold Monetization Scheme single borrower lending limit",
+  "Gold Monetization Scheme maximum quantum of gold loan per borrower"
+ ],
+ "How much of a joint venture does an Indian company need to own to get a loan from the bank?": [
+  "equity investment joint venture overseas direct investment RBI",
+  "credit facilities to joint ventures wholly owned subsidiaries Indian companies"
+ ],
+ "Will I get charged a fee if I break my NRE fixed deposit early to move the money into an RFC account?": [
+  "premature withdrawal penalty Non-Resident External (NRE) fixed deposit",
+  "transfer funds NRE deposit to Resident Foreign Currency (RFC) account charges"
+ ],
+ "If I renew my FCNR deposit within 14 days of it maturing, what interest rate will I get on the renewed deposit?": [
+  "FCNR(B) deposit renewal within 14 days maturity interest rate",
+  "overdue FCNR deposit renewal interest rate guidelines"
+ ],
+ "If my fixed deposit matures on a weekend or a holiday, how do I get the interest for those extra days?": [
+  "payment of interest on maturity of fixed deposit holiday weekend",
+  "calculation of interest for intervening holidays fixed deposit maturity"
+ ],
+ "Do I need to keep extra capital for counterparty risk on collateral that a clearing member puts with a bankruptcy-remote custodian?": [
+  "capital requirements counterparty credit risk margin collateral bankruptcy remote custodian",
+  "clearing member collateral exposure capital charge bankruptcy remote custodian"
+ ],
+ "What does a foreign bank in India need to do for its capital to count as Common Equity Tier 1?": [
+  "foreign bank branch capital components Common Equity Tier 1 eligibility India",
+  "assignment of capital foreign bank Common Equity Tier 1 Master Direction"
+ ],
+ "What's the maximum percentage of a bank's NDTL that we can borrow through the Marginal Standing Facility scheme?": [
+  "Marginal Standing Facility (MSF) borrowing limit percentage of NDTL",
+  "maximum borrowing limit under Marginal Standing Facility Net Demand and Time Liabilities"
+ ],
+ "What's the fine or penalty a bank has to pay if it doesn't maintain the required SLR on any day?": [
+  "Statutory Liquidity Ratio (SLR) penal interest",
+  "default in maintenance of SLR penalty"
+ ],
+ "What do Non-Executive Directors actually do in a private bank when it comes to making decisions and talking to the staff?": [
+  "Non-Executive Directors role and responsibilities in private sector banks",
+  "governance framework and interaction with staff for Non-Executive Directors in banks"
+ ],
+ "What does a director need to tell the Board about their other company roles and business interests?": [
+  "director disclosure of interest in other companies",
+  "disclosure of statutory and business interests by bank directors to Board"
+ ],
+ "What documents does a bank need to submit when applying to offer digital banking services?": [
+  "digital banking unit approval application documents",
+  "application for internet banking permission documents commercial banks"
+ ],
+ "What can I see or do in my digital banking account if I only have view-only access?": [
+  "view-only access digital banking permitted transactions",
+  "internet banking read-only rights functionalities"
+ ],
+ "Can the bank force me to use their mobile app just to get a debit card?": [
+  "issuance of debit card mandatory mobile application usage",
+  "forcing customer to use mobile banking application for banking services"
+ ],
+ "When do the new RBI internal ombudsman rules for commercial banks start?": [
+  "Internal Ombudsman mechanism for commercial banks effective date",
+  "implementation timeline Reserve Bank of India Internal Ombudsman directions"
+ ],
+ "How many working days does a bank have to send its Internal Ombudsman details to the RBI?": [
+  "Internal Ombudsman reporting timeline working days RBI",
+  "Internal Ombudsman particulars submission RBI deadline"
+ ],
+ "What does \"Dividend Payout Ratio\" mean in the RBI rules?": [
+  "Dividend Payout Ratio guidelines commercial banks",
+  "computation of Dividend Payout Ratio RBI regulations"
+ ],
+ "How do you figure out the adjusted profit after tax when deciding on dividends?": [
+  "dividend distribution guidelines adjusted profit after tax commercial banks",
+  "computation of net profit for dividend payout regulation"
+ ],
+ "What things does the board look at when deciding to pay out dividends or send profits?": [
+  "dividend payout conditions commercial banks board oversight",
+  "remittance of profit financial criteria board approval RBI"
+ ],
+ "What is the maximum amount for recurring card payments or e-mandates that doesn't need an extra authentication step like an OTP?": [
+  "additional factor of authentication (AFA) limit for recurring transactions",
+  "e-mandates on cards maximum limit without additional authentication"
+ ],
+ "Can I change the end date of an e-mandate after it's already set up?": [
+  "modification of e-mandate validity period",
+  "alteration of recurring payment end date"
+ ],
+ "If a payment system operator can't clear what they owe, what do they need to do within the given timeframe after their license is canceled?": [
+  "Payment System Operator license cancellation settlement of obligations timeline",
+  "unfulfilled clearing obligations revocation of authorization Payment and Settlement Systems Act"
+ ],
+ "How do they calculate an entity's net worth for getting RBI payment system approval?": [
+  "computation of net worth for payment system authorization",
+  "minimum net worth criteria for payment system operator RBI"
+ ],
+ "When does a bank or mutual fund become part of the promoter group if they own 10% or more of the promoter's shares?": [
+  "promoter group classification financial institution shareholding threshold",
+  "bank mutual fund equity holding promoter group criteria"
+ ],
+ "How long can I take a loan for growing long-duration crops under the KCC scheme?": [
+  "Kisan Credit Card (KCC) repayment period long duration crops",
+  "KCC term loan repayment duration for allied activities and long duration crops"
+ ],
+ "How many days does the bank have to either declare a red-flagged account as fraud or clear its red flag?": [
+  "red-flagged account classification fraud timeline days",
+  "review and decision period for red-flagged accounts commercial banks"
+ ],
+ "How long does the bank have to report an account with three crores or more in total exposure to the RBI's CRILC platform once it gets red-flagged?": [
+  "CRILC reporting timeline red flagged account aggregate exposure five crore and above",
+  "timeframe for reporting accounts classified as red flag to CRILC platform"
+ ],
+ "Besides PCI-DSS and PCI-SSF, what other card security rules do we need to follow when issuing cards?": [
+  "credit card debit card issuance security standards requirements",
+  "payment card industry data security standard compliance RBI"
+ ],
+ "How frequently does the bank need to do security checks on its payment apps and systems?": [
+  "frequency of security audits and vulnerability assessments for payment applications",
+  "periodic system audit and security review intervals for payment systems"
+ ],
+ "What happens to my personal and account details when I log out or close the banking app?": [
+  "customer data privacy mobile banking application logout",
+  "deactivation account details mobile banking application retention"
+ ],
+ "What does the CSOC actually do when handling security incidents and checking digital evidence?": [
+  "Cyber Security Operations Centre (CSOC) incident management",
+  "digital forensics and evidence collection guidelines"
+ ],
+ "What kind of device inventory does the bank need to keep track of for everything on its network?": [
+  "IT asset inventory management guidelines commercial banks",
+  "network device and hardware inventory maintenance regulations"
+ ],
+ "What does the bank need to do when its computers or software get too old?": [
+  "IT system obsolescence management commercial banks",
+  "end of life software hardware replacement guidelines RBI"
+ ],
+ "How long do I have to upgrade my basic wallet to full KYC, and can I use UPI with it before doing that?": [
+  "minimum detail prepaid payment instrument (PPI) full KYC conversion timeline",
+  "UPI interoperability basic PPI minimum details KYC"
+ ],
+ "Who takes care of the clearing and settlement in the Bharat Bill Payment System, and where do non-bank companies have to keep the money?": [
+  "Bharat Bill Payment System clearing agency settlement",
+  "non-bank PPI escrow account requirement Bharat Bill Payment System"
+ ],
+ "When do payment companies need to follow the RBI's 2025 authentication rules, and do card issuers get a later deadline for international online card transactions?": [
+  "implementation timeline for authentication of digital payment transactions directions 2025",
+  "timeline for card issuers international online card transactions authentication guidelines"
+ ],
+ "How much money can I send overseas in a year using LRS, and am I allowed to buy property abroad with it?": [
+  "Liberalised Remittance Scheme annual limit residents",
+  "Liberalised Remittance Scheme immovable property acquisition abroad"
+ ],
+ "A bank sent and charged me for a credit card I never requested—what are they supposed to do about this, and am I on the hook if someone uses it fraudulently?": [
+  "unsolicited credit card issuance charges levied",
+  "credit card fraudulent transactions liability reporting"
+ ],
+ "How long do I have to fix my savings account balance if it drops below the minimum, and how do you calculate the fee?": [
+  "savings account minimum balance maintenance period notice",
+  "charges levy for non-maintenance of minimum balance in savings account"
+ ],
+ "If money gets stolen from my account because of someone else's security breach, how much am I on the hook for if I report it in three days versus five days?": [
+  "unauthorised electronic banking transactions liability reporting timeline",
+  "customer protection limited liability third party breach"
+ ],
+ "If I report a fraudulent credit card charge, will the bank charge me fees while they look into it, and how fast do I need to report it so I'm not on the hook for someone else's system glitch?": [
+  "credit card unauthorized transaction reporting timeline liability",
+  "levy of charges during investigation of fraudulent credit card transactions"
+ ]
+}

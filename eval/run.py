@@ -76,6 +76,29 @@ def evaluate_retrieval(
     return summary
 
 
+RETRIEVAL_PATH = RESULTS_DIR / "retrieval.csv"
+
+
+def load_retrieval() -> list[dict]:
+    if not RETRIEVAL_PATH.exists():
+        return []
+    with RETRIEVAL_PATH.open(encoding="utf-8", newline="") as f:
+        return [{**DEFAULT_CONFIG, **row} for row in csv.DictReader(f)]
+
+
+def save_retrieval(new_rows: list[dict]) -> None:
+    """Merge with earlier runs: a new result replaces an old one with the same configuration."""
+    RESULTS_DIR.mkdir(exist_ok=True)
+    rows = {tuple(str(r[c]) for c in CONFIG_KEYS): r for r in load_retrieval()}
+    for row in new_rows:
+        rows[tuple(str(row[c]) for c in CONFIG_KEYS)] = row
+    fields = [*CONFIG_KEYS, *[c for c in new_rows[0] if c not in CONFIG_KEYS]]
+    with RETRIEVAL_PATH.open("w", encoding="utf-8", newline="") as f:
+        writer = csv.DictWriter(f, fieldnames=fields, extrasaction="ignore")
+        writer.writeheader()
+        writer.writerows(rows.values())
+
+
 def run_retrieval(args) -> int:
     settings = get_settings()
     embedder = Embedder(settings.embedding_model)
@@ -97,29 +120,14 @@ def run_retrieval(args) -> int:
                 }
                 scores = evaluate_retrieval(records, retriever, mode, args.k, reranker, rewriter)
                 results.append({**config, **scores})
+                save_retrieval([results[-1]])  # saved per configuration: a stop loses one at most
                 print(
                     f"  {' / '.join(config.values())}: recall@5 {scores['recall@5']:.3f}  "
                     f"MRR {scores['mrr']:.3f}"
                 )
             retriever.close()
 
-    # Merge with earlier runs: a new result replaces an old one with the same configuration.
-    RESULTS_DIR.mkdir(exist_ok=True)
-    path = RESULTS_DIR / "retrieval.csv"
-    rows: dict[tuple, dict] = {}
-    if path.exists():
-        with path.open(encoding="utf-8", newline="") as f:
-            for row in csv.DictReader(f):
-                row = {**DEFAULT_CONFIG, **row}
-                rows[tuple(row[c] for c in CONFIG_KEYS)] = row
-    for row in results:
-        rows[tuple(str(row[c]) for c in CONFIG_KEYS)] = row
-    fields = [*CONFIG_KEYS, *[c for c in results[0] if c not in CONFIG_KEYS]]
-    with path.open("w", encoding="utf-8", newline="") as f:
-        writer = csv.DictWriter(f, fieldnames=fields, extrasaction="ignore")
-        writer.writeheader()
-        writer.writerows(rows.values())
-    print_retrieval_table(list(rows.values()))
+    print_retrieval_table(load_retrieval())
     return 0
 
 
