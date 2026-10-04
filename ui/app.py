@@ -4,6 +4,7 @@ uv run streamlit run ui/app.py
 """
 
 import json
+import os
 import re
 import sys
 from pathlib import Path
@@ -15,11 +16,37 @@ import streamlit as st
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
+
+def secrets_to_environment() -> None:
+    """On Streamlit Community Cloud, keys are added as app secrets. Copy top-level secrets
+    into the environment, where DocuMind's settings read them (an existing value wins)."""
+    try:
+        secrets = dict(st.secrets)
+    except Exception:  # no secrets file: running locally with .env
+        return
+    for key, value in secrets.items():
+        if isinstance(value, str | int | float | bool):
+            os.environ.setdefault(key.upper(), str(value))
+
+
+secrets_to_environment()  # before anything reads the settings
+
 from documind.config import get_settings  # noqa: E402
 from documind.generation.llm import DailyLimitError, LLMError  # noqa: E402
 from documind.limits import RateLimiter  # noqa: E402
 from documind.observability import new_request_id, setup_logging  # noqa: E402
-from documind.service import get_documind  # noqa: E402
+from documind.service import get_documind, load_documents  # noqa: E402
+
+SETUP_HELP = """DocuMind can't reach its answer model: **GEMINI_API_KEY is not set.**
+
+On Streamlit Community Cloud: **Manage app → ⋮ → Settings → Secrets**, add this line at the top
+level (not under a `[section]`), save, then reboot the app:
+
+```toml
+GEMINI_API_KEY = "your-key-from-aistudio.google.com"
+```
+
+Running locally: put `GEMINI_API_KEY=...` in the `.env` file."""
 
 RESULTS = ROOT / "eval" / "results"
 EXAMPLES = [  # everyday wording, each checked against the live app
@@ -43,9 +70,21 @@ st.markdown(
 
 
 @st.cache_resource(show_spinner="Loading the search index and models (first start only)…")
-def service():
+def load_service():
     setup_logging(get_settings().log_level)
     return get_documind()
+
+
+def service():
+    """The loaded DocuMind, or None (with a setup message) if it can't start."""
+    if not get_settings().llm_configured:
+        st.error(SETUP_HELP)
+        return None
+    try:
+        return load_service()
+    except LLMError as error:
+        st.error(f"DocuMind couldn't start the answer model: {error}")
+        return None
 
 
 @st.cache_resource
@@ -103,8 +142,11 @@ def ask_tab() -> None:
         return
     with st.chat_message("assistant"):
         with st.spinner("Searching the Directions…"):
+            documind = service()
+            if documind is None:
+                return
             try:
-                answer = service().ask(question)
+                answer = documind.ask(question)
             except DailyLimitError:
                 st.error("The free daily limit of the answer model is used up. Try again later.")
                 return
@@ -254,7 +296,7 @@ def how_tab() -> None:
 
 
 def documents_tab() -> None:
-    docs = pd.DataFrame(service().documents)
+    docs = pd.DataFrame(load_documents(get_settings()))  # works even without an API key
     st.caption(f"{len(docs)} RBI Directions. DocuMind answers only from these.")
     st.dataframe(
         docs[["topic", "title", "issued", "url"]],
