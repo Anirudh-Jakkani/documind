@@ -57,8 +57,12 @@ class Retriever:
         self.strategy = strategy or self.settings.chunk_strategy
         paths = index_paths(self.settings, self.strategy)
         if not paths["chunks"].exists():
+            checked = ", ".join(
+                f"{p} ({'found' if p.exists() else 'missing'})"
+                for p in (self.settings.index_dir, paths["dir"], paths["chunks"])
+            )
             raise FileNotFoundError(
-                f"No index for '{self.strategy}'. Run: "
+                f"No index for '{self.strategy}'. Checked: {checked}. Build one with: "
                 f"uv run python -m documind.index --strategy {self.strategy}"
             )
         self.chunks = load_chunks(paths["chunks"])

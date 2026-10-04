@@ -13,7 +13,8 @@ def default_index_dir(root: Path = ROOT_DIR) -> Path:
     """The locally built index (data/index) if there is one, else the prebuilt index committed
     for hosting (deploy/index), so a fresh clone runs without rebuilding."""
     local = root / "data" / "index"
-    return local if (local / "qdrant").exists() else root / "deploy" / "index"
+    built_locally = (local / "qdrant").is_dir() and any(local.glob("*/chunks.jsonl"))
+    return local if built_locally else root / "deploy" / "index"
 
 
 class Settings(BaseSettings):

@@ -52,4 +52,8 @@ def test_index_dir_falls_back_to_the_committed_index(tmp_path):
 
     assert default_index_dir(tmp_path) == tmp_path / "deploy" / "index"  # fresh clone
     (tmp_path / "data" / "index" / "qdrant").mkdir(parents=True)
+    # An empty qdrant folder (e.g. created by a client) is not a built index.
+    assert default_index_dir(tmp_path) == tmp_path / "deploy" / "index"
+    (tmp_path / "data" / "index" / "section").mkdir()
+    (tmp_path / "data" / "index" / "section" / "chunks.jsonl").write_text("{}")
     assert default_index_dir(tmp_path) == tmp_path / "data" / "index"  # built locally
