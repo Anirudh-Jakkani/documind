@@ -1,6 +1,10 @@
 # DocuMind
 
 [![CI](https://github.com/Anirudh-Jakkani/documind/actions/workflows/ci.yml/badge.svg)](https://github.com/Anirudh-Jakkani/documind/actions/workflows/ci.yml)
+[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://ani-documind.streamlit.app/)
+
+**Live demo: [ani-documind.streamlit.app](https://ani-documind.streamlit.app/)** (free hosting:
+after a quiet spell the app sleeps, and waking it takes about a minute)
 
 Ask questions about a set of documents and get answers with citations (document, section, page).
 If the answer isn't in the documents, DocuMind says so instead of guessing.
@@ -9,8 +13,6 @@ The retrieval and answer quality are **measured** on a reviewed test set of 128 
 choice (chunking, embedding model, search method, reranker) is compared in a results table.
 
 Demo documents: 42 RBI Directions (commercial banks, payments, foreign exchange, financial inclusion).
-
-> Work in progress. See the build plan below.
 
 ## Build plan
 
@@ -25,7 +27,7 @@ Demo documents: 42 RBI Directions (commercial banks, payments, foreign exchange,
 | 6 | Experiments and results table | ✅ |
 | 7 | API and Streamlit interface | ✅ |
 | 8 | Caching, logging, CI | ✅ |
-| 9 | Deploy to Hugging Face Spaces | |
+| 9 | Deploy (Streamlit Community Cloud) | ✅ |
 
 ## Test set
 
