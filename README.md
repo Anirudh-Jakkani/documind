@@ -6,7 +6,7 @@ If the answer isn't in the documents, DocuMind says so instead of guessing.
 The retrieval and answer quality are **measured** on a reviewed test set of 128 questions, and every design
 choice (chunking, embedding model, search method, reranker) is compared in a results table.
 
-Demo documents: RBI Master Directions and FAQs.
+Demo documents: 42 RBI Directions (commercial banks, payments, foreign exchange, financial inclusion).
 
 > Work in progress. See the build plan below.
 
@@ -20,7 +20,7 @@ Demo documents: RBI Master Directions and FAQs.
 | 3 | First working version with citations | ✅ |
 | 4 | Test set (128 reviewed questions, incl. unanswerable) | ✅ |
 | 5 | Evaluation harness and baseline scores | ✅ |
-| 6 | Experiments and results table | |
+| 6 | Experiments and results table | ✅ |
 | 7 | API and Streamlit interface | |
 | 8 | Caching, logging, CI | |
 | 9 | Deploy to Hugging Face Spaces | |
@@ -99,6 +99,54 @@ faithful, but wrong. **Retrieval, not generation, is the bottleneck.**
 
 Reproduce: `uv run python -m eval.run retrieval` (free) and
 `uv run python -m eval.run answers --name baseline`.
+
+## Experiments (Phase 6): fixing retrieval
+
+Phase 5 showed retrieval was the bottleneck, and that the test questions share vocabulary with
+the passages (they were drafted from them). So every question was also **paraphrased into
+everyday words** (`eval/dataset_paraphrased.jsonl`, same evidence) and each idea was tested on
+both sets. Section chunks, top 5; recall@5 / MRR on the 102 answerable questions:
+
+| Setup | Original questions | Paraphrased (everyday words) | Time / question (CPU) |
+|---|---|---|---|
+| BM25 | 0.926 / 0.872 | 0.613 / 0.462 | <0.1 s |
+| Dense (bge-small) | 0.838 / 0.781 | 0.726 / 0.601 | 0.1 s |
+| Dense (bge-base, 3× larger) | 0.858 / 0.750 | 0.716 / 0.564 | 0.2 s |
+| Hybrid (baseline) | 0.922 / 0.848 | 0.691 / 0.553 | 0.1 s |
+| Hybrid + MiniLM reranker | 0.922 / 0.835 | 0.730 / 0.621 | ~3 s |
+| Hybrid + LLM query rewriting | 0.902 / 0.748 | 0.765 / 0.634 | +1 LLM call |
+| **Hybrid + rewriting + MiniLM reranker** (shipped) | 0.922 / 0.835 | 0.765 / 0.637 | ~4 s |
+| Hybrid + bge-reranker-base | **0.966 / 0.929** | **0.814 / 0.686** | ~23 s |
+
+**Answer quality**, baseline vs the shipped setup (judge: Qwen3.8-27B):
+
+| | Baseline | Rewriting + MiniLM reranker |
+|---|---|---|
+| Paraphrased: correct / correct-or-partial | 66.7% / 73.5% | **70.6% / 82.3%** |
+| Paraphrased: false "not found" | 23.5% | **13.7%** |
+| Original: correct | 86.3% | 86.3% |
+| Original: multi-part fully correct | 62.5% | **75.0%** |
+| Faithful · correct refusals (both sets) | 100% · 100% | 100% · 100% |
+| Median latency | 1.4 s | 5.7 s |
+
+**What I learned**
+- **Keyword search collapses on everyday wording** (recall@5 0.93 → 0.61). Measuring only
+  questions drafted from the documents would have hidden this.
+- **A bigger embedding model didn't help** (bge-base ≈ bge-small, 3× slower to index). The
+  problem was vocabulary, not model size.
+- **LLM query rewriting** ("fees" → "charges levied") was the biggest single gain on everyday
+  questions; the MiniLM reranker then recovers the ranking quality rewriting costs on the
+  original questions.
+- **bge-reranker-base is the most accurate** by a clear margin, but takes ~23 s per question on
+  a laptop CPU. With a GPU it would be the default; on free CPU hosting the shipped setup is
+  rewriting + MiniLM (~6 s end to end).
+- Faithfulness and refusals stayed at 100% throughout: the gains come from finding the right
+  text, not from letting the model guess.
+
+Reproduce: `uv run python -m eval.run retrieval --strategies section --datasets original
+paraphrased --modes hybrid --rewrite --rerank minilm` and
+`uv run python -m eval.run answers --name best-paraphrased --dataset paraphrased --rewrite
+--rerank minilm`.
 
 ## Run locally
 

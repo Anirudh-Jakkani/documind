@@ -1,0 +1,47 @@
+{
+  "name": "best-paraphrased",
+  "dataset": "paraphrased",
+  "strategy": "section",
+  "mode": "hybrid",
+  "k": 5,
+  "embedding": "bge-small-en-v1.5",
+  "rerank": "minilm",
+  "rewrite": "yes",
+  "answer_model": "gemini:gemini-3.5-flash-lite",
+  "judge_model": "groq:qwen/qwen3.8-27b",
+  "questions": 128,
+  "answerable": {
+    "n": 102,
+    "answered": 0.8627,
+    "false_refusal": 0.1373,
+    "correct": 0.7059,
+    "correct_or_partial": 0.8235,
+    "correctness_score_when_answered": 0.8864,
+    "faithful_when_answered": 1.0,
+    "cites_evidence_when_answered": 0.875,
+    "invalid_citation_rate": 0.0,
+    "retrieval": {
+      "recall@1": 0.5147,
+      "hit@1": 0.5,
+      "recall@3": 0.6765,
+      "hit@3": 0.6667,
+      "recall@5": 0.7647,
+      "hit@5": 0.7451,
+      "mrr": 0.6217,
+      "ndcg@5": 0.6604
+    }
+  },
+  "unanswerable": {
+    "n": 26,
+    "correct_refusal": 1.0
+  },
+  "multi_part_correct": 0.375,
+  "latency_s": {
+    "p50": 5.74,
+    "p95": 8.65
+  },
+  "tokens_per_question": {
+    "prompt": 1627,
+    "completion": 78
+  }
+}

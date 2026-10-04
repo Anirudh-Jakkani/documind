@@ -23,3 +23,5 @@ original,section,hybrid,bge-small-en-v1.5,none,yes,0.6275,0.6176,0.8088,0.7941,0
 paraphrased,section,hybrid,bge-small-en-v1.5,none,yes,0.5049,0.5,0.6814,0.6569,0.7647,0.7451,0.8971,0.8922,0.6344,0.6646,3712.9
 original,section,hybrid,bge-small-en-v1.5,minilm,yes,0.7304,0.7059,0.902,0.8922,0.9216,0.9118,0.9706,0.9706,0.8353,0.8581,4850.1
 paraphrased,section,hybrid,bge-small-en-v1.5,minilm,yes,0.5147,0.5,0.6765,0.6667,0.7647,0.7451,0.8922,0.8922,0.6366,0.6604,5432.3
+paraphrased,section,hybrid,bge-small-en-v1.5,bge,no,0.5784,0.5686,0.7402,0.7255,0.8137,0.8137,0.8627,0.8529,0.6858,0.7125,21398.3
+original,section,hybrid,bge-small-en-v1.5,bge,no,0.8578,0.8235,0.951,0.9412,0.9657,0.9608,0.9706,0.9706,0.9289,0.9337,26655.8
