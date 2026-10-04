@@ -15,7 +15,10 @@ import streamlit as st
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
+from documind.config import get_settings  # noqa: E402
 from documind.generation.llm import DailyLimitError, LLMError  # noqa: E402
+from documind.limits import RateLimiter  # noqa: E402
+from documind.observability import new_request_id, setup_logging  # noqa: E402
 from documind.service import get_documind  # noqa: E402
 
 RESULTS = ROOT / "eval" / "results"
@@ -41,7 +44,14 @@ st.markdown(
 
 @st.cache_resource(show_spinner="Loading the search index and models (first start only)…")
 def service():
+    setup_logging(get_settings().log_level)
     return get_documind()
+
+
+@st.cache_resource
+def limiter() -> RateLimiter:
+    """Shared by all sessions: each browser session gets RATE_LIMIT_PER_MINUTE questions."""
+    return RateLimiter(get_settings().rate_limit_per_minute)
 
 
 def highlight_citations(text: str) -> str:
@@ -86,6 +96,11 @@ def ask_tab() -> None:
         return
     with st.chat_message("user"):
         st.write(question)
+    session = st.session_state.setdefault("session_id", new_request_id())
+    wait = limiter().check(session)
+    if wait:
+        st.warning(f"That's a lot of questions in a minute. Please wait {wait:.0f} s.")
+        return
     with st.chat_message("assistant"):
         with st.spinner("Searching the Directions…"):
             try:

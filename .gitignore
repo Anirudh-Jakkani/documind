@@ -15,3 +15,6 @@ data/index/*
 
 # Generator bookkeeping
 eval/.generate_progress.json
+
+# Request log (may contain user questions)
+logs/

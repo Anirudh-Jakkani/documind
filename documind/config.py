@@ -53,6 +53,13 @@ class Settings(BaseSettings):
     reranker: str = Field(default="minilm", pattern="^(none|minilm|bge)$")
     query_rewriting: bool = True
 
+    # Serving: protect the free LLM quotas and record what happens
+    answer_cache_size: int = 256  # 0 turns the cache off
+    answer_cache_ttl_hours: float = 24
+    rate_limit_per_minute: int = 10  # per IP (API) or per browser session (web app); 0 = off
+    request_log: Path | None = ROOT_DIR / "logs" / "requests.jsonl"
+    log_level: str = "INFO"
+
     def api_key(self, provider: str) -> str:
         return getattr(self, f"{provider}_api_key", "")
 

@@ -4,6 +4,7 @@ from fastapi.testclient import TestClient
 import app.main as api
 from documind.generation.answer import Answer, Source
 from documind.generation.llm import DailyLimitError
+from documind.limits import RateLimiter
 
 
 class FakeDocuMind:
@@ -20,7 +21,7 @@ class FakeDocuMind:
     def __init__(self, error: Exception | None = None):
         self.error = error
 
-    def ask(self, question):
+    def ask(self, question, request_id=None):
         if self.error:
             raise self.error
         source = Source(
@@ -49,8 +50,9 @@ class FakeDocuMind:
 
 @pytest.fixture
 def client(monkeypatch):
-    def use(fake):
+    def use(fake, limit=100):
         monkeypatch.setattr(api, "get_documind", lambda: fake)
+        monkeypatch.setattr(api, "limiter", RateLimiter(limit))
         return TestClient(api.app)
 
     return use
@@ -78,3 +80,11 @@ def test_documents_and_info(client):
     c = client(FakeDocuMind())
     assert c.get("/documents").json()[0]["doc_id"] == "rbi-1"
     assert c.get("/info").json() == {"documents": 1}
+
+
+def test_rate_limit_returns_429_with_retry_after(client):
+    c = client(FakeDocuMind(), limit=1)
+    first = c.post("/ask", json={"question": "Card closure time?"})
+    assert first.status_code == 200 and first.headers["X-Request-ID"]
+    second = c.post("/ask", json={"question": "Card closure time?"})
+    assert second.status_code == 429 and int(second.headers["Retry-After"]) > 0

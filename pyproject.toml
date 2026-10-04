@@ -15,6 +15,7 @@ dependencies = [
     "qdrant-client>=1.19.1",
     "numpy>=2.5.3",
     "streamlit>=1.65.0",
+    "torch>=2.4",
 ]
 
 [dependency-groups]
@@ -35,3 +36,13 @@ select = ["E", "F", "I", "B", "UP"]
 
 [tool.uv]
 package = false
+
+# CPU-only PyTorch: the default Linux build bundles ~2.5 GB of CUDA libraries that DocuMind
+# never uses, which slows CI and bloats the deployment image.
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
+
+[tool.uv.sources]
+torch = [{ index = "pytorch-cpu" }]

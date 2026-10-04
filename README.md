@@ -22,7 +22,7 @@ Demo documents: 42 RBI Directions (commercial banks, payments, foreign exchange,
 | 5 | Evaluation harness and baseline scores | ✅ |
 | 6 | Experiments and results table | ✅ |
 | 7 | API and Streamlit interface | ✅ |
-| 8 | Caching, logging, CI | |
+| 8 | Caching, logging, CI | ✅ |
 | 9 | Deploy to Hugging Face Spaces | |
 
 ## Test set
@@ -147,6 +147,25 @@ Reproduce: `uv run python -m eval.run retrieval --strategies section --datasets 
 paraphrased --modes hybrid --rewrite --rerank minilm` and
 `uv run python -m eval.run answers --name best-paraphrased --dataset paraphrased --rewrite
 --rerank minilm`.
+
+## Running it as a service
+
+- **Answer cache:** repeated questions (ignoring case, spacing and final punctuation) are
+  answered instantly from an LRU cache (256 entries, 24 h), with no LLM call.
+- **Rate limits:** 10 questions per minute per visitor (per IP for the API, per browser session
+  for the web app), so one visitor can't use up the free daily LLM quota. The API answers
+  `429` with `Retry-After`.
+- **Request log:** one JSON line per question in `logs/requests.jsonl` (question, found,
+  cited sources, retrieved chunk ids, timings, tokens, cached, request id; failures too),
+  rotated at 5 MB. Every API answer carries an `X-Request-ID` header to match it to the log.
+- **Index check:** search refuses to start if the vector index and the chunks don't match
+  (this caught a real stale-index bug during Phase 6).
+- **CI:** GitHub Actions runs ruff (lint and format) and the 66 tests on every push. Tests use
+  stand-ins for the models, index and LLMs, so CI needs no data and no API keys.
+- **CPU-only PyTorch** from PyTorch's CPU index keeps installs and images free of ~2.5 GB of
+  unused CUDA libraries.
+
+All limits are settings (`RATE_LIMIT_PER_MINUTE`, `ANSWER_CACHE_SIZE`, `REQUEST_LOG`, ...).
 
 ## Known limitations
 
