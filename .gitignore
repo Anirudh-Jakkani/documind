@@ -21,3 +21,4 @@ logs/
 
 # Built Hugging Face Space (deploy/build_space.py)
 deploy/space/
+deploy/index/qdrant/.lock

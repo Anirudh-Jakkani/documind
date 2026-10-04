@@ -45,3 +45,11 @@ def test_model_override_with_provider_prefix():
 def test_missing_key_is_a_clear_error():
     with pytest.raises(LLMError, match="GEMINI_API_KEY"):
         LLMClient(settings())
+
+
+def test_index_dir_falls_back_to_the_committed_index(tmp_path):
+    from documind.config import default_index_dir
+
+    assert default_index_dir(tmp_path) == tmp_path / "deploy" / "index"  # fresh clone
+    (tmp_path / "data" / "index" / "qdrant").mkdir(parents=True)
+    assert default_index_dir(tmp_path) == tmp_path / "data" / "index"  # built locally

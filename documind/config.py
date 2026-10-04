@@ -9,12 +9,19 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 ROOT_DIR = Path(__file__).resolve().parent.parent
 
 
+def default_index_dir(root: Path = ROOT_DIR) -> Path:
+    """The locally built index (data/index) if there is one, else the prebuilt index committed
+    for hosting (deploy/index), so a fresh clone runs without rebuilding."""
+    local = root / "data" / "index"
+    return local if (local / "qdrant").exists() else root / "deploy" / "index"
+
+
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(env_file=ROOT_DIR / ".env", extra="ignore")
 
     # Paths
     data_dir: Path = ROOT_DIR / "data"
-    index_dir: Path = ROOT_DIR / "data" / "index"
+    index_dir: Path = Field(default_factory=default_index_dir)
 
     # API keys, one per provider (all OpenAI-compatible)
     gemini_api_key: str = ""

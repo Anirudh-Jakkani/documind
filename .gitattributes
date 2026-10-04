@@ -1,0 +1,2 @@
+# Prebuilt search index: keep byte-for-byte identical on every platform
+deploy/index/** -text

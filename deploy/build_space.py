@@ -2,6 +2,7 @@
 
     uv run python -m deploy.build_space                 # build deploy/space/ only
     uv run python -m deploy.build_space --upload        # build and upload (needs HF_TOKEN)
+    uv run python -m deploy.build_space --index-only    # refresh deploy/index (Streamlit Cloud)
 
 The Space gets: every file tracked by git, the Dockerfile, a README with the Space's settings
 block, and the prebuilt search index for the shipped configuration (section chunks, BM25 and
@@ -50,19 +51,19 @@ def copy_tracked_files(target: Path) -> int:
     return len(files)
 
 
-def copy_index(target: Path, settings: Settings) -> int:
+def copy_index(index_target: Path, settings: Settings) -> int:
     """Copy the shipped index: chunks and BM25 files, and only the vectors of the shipped
     collection (the experiment collections stay local)."""
     strategy = settings.chunk_strategy
     source = index_paths(settings, strategy)
-    destination = target / "data" / "index" / strategy
+    destination = index_target / strategy
     destination.mkdir(parents=True, exist_ok=True)
     shutil.copy2(source["chunks"], destination / "chunks.jsonl")
     shutil.copy2(source["bm25"], destination / "bm25.pkl.gz")
 
     name = collection_name(strategy, settings.embedding_model)
     src = QdrantClient(path=str(source["qdrant"]))
-    dst = QdrantClient(path=str(target / "data" / "index" / "qdrant"))
+    dst = QdrantClient(path=str(index_target / "qdrant"))
     size = src.get_collection(name).config.params.vectors.size
     dst.create_collection(name, vectors_config=VectorParams(size=size, distance=Distance.COSINE))
     offset, copied = None, 0
@@ -91,7 +92,7 @@ def build() -> Path:
     shutil.copy2(ROOT_DIR / "deploy" / "Dockerfile", SPACE_DIR / "Dockerfile")
     readme = (ROOT_DIR / "README.md").read_text(encoding="utf-8")
     (SPACE_DIR / "README.md").write_text(SPACE_HEADER + readme, encoding="utf-8")
-    vectors = copy_index(SPACE_DIR, settings)
+    vectors = copy_index(SPACE_DIR / "data" / "index", settings)
     total = sum(f.stat().st_size for f in SPACE_DIR.rglob("*") if f.is_file()) / 1e6
     print(f"Built {SPACE_DIR}: {n_files} tracked files, {vectors:,} vectors, {total:.1f} MB")
     return SPACE_DIR
@@ -115,8 +116,24 @@ def upload(folder: Path, repo_id: str, token: str) -> str:
 def main() -> int:
     parser = argparse.ArgumentParser(description="Build and upload the Hugging Face Space")
     parser.add_argument("--upload", action="store_true")
+    parser.add_argument(
+        "--index-only",
+        action="store_true",
+        help="write the shipped index to deploy/index (committed, for Streamlit Cloud)",
+    )
     parser.add_argument("--space", default="Anijack/documind", help="user/space-name")
     args = parser.parse_args()
+
+    if args.index_only:
+        settings = Settings()
+        target = ROOT_DIR / "deploy" / "index"
+        if settings.index_dir.resolve() == target.resolve():
+            print("No local index in data/index to copy from. Build it first.")
+            return 1
+        if target.exists():
+            shutil.rmtree(target)
+        print(f"Wrote {copy_index(target, settings):,} vectors to {target}")
+        return 0
 
     folder = build()
     if args.upload:

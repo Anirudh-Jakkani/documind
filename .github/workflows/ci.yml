@@ -28,3 +28,8 @@ jobs:
       # index and LLMs, so CI needs no data downloads and no API keys.
       - name: Test
         run: uv run pytest -q
+
+      - name: requirements.txt matches uv.lock
+        run: |
+          sh deploy/export_requirements.sh
+          git diff --exit-code requirements.txt
