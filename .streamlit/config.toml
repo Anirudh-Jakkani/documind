@@ -1,0 +1,12 @@
+[server]
+# The watcher scans every imported module (including all of transformers) for changes,
+# which floods the log and slows the app badly. Restart the app to see code changes.
+fileWatcherType = "none"
+headless = true
+
+[browser]
+gatherUsageStats = false
+
+[theme]
+base = "dark"
+primaryColor = "#5ca0ff"

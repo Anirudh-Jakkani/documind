@@ -2,6 +2,12 @@
   "version": "0.0.1",
   "configurations": [
     {
+      "name": "documind",
+      "runtimeExecutable": "uv",
+      "runtimeArgs": ["run", "streamlit", "run", "ui/app.py", "--server.headless", "true", "--server.port", "8502", "--browser.gatherUsageStats", "false"],
+      "port": 8502
+    },
+    {
       "name": "review",
       "runtimeExecutable": "uv",
       "runtimeArgs": ["run", "streamlit", "run", "ui/review.py", "--server.headless", "true", "--server.port", "8501", "--browser.gatherUsageStats", "false"],

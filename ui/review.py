@@ -77,7 +77,7 @@ with st.sidebar:
 
     st.header("Finish")
     kept_records = [r for r in records if r.status in ("approved", "edited")]
-    if st.button(f"Export {len(kept_records)} kept questions", use_container_width=True):
+    if st.button(f"Export {len(kept_records)} kept questions", width="stretch"):
         save_records(kept_records, DATASET_PATH)
         st.success(f"Saved {len(kept_records)} questions to eval/{DATASET_PATH.name}")
 
@@ -133,23 +133,23 @@ with left:
         if not only_pending:
             st.session_state.pos += 1
 
-    if keep.button("✅ Keep", use_container_width=True, type="primary"):
+    if keep.button("✅ Keep", width="stretch", type="primary"):
         record.status = "approved"
         save_records(records, CANDIDATES_PATH)
         advance()
         st.rerun()
-    if save.button("✏️ Save edits", use_container_width=True):
+    if save.button("✏️ Save edits", width="stretch"):
         record.question, record.answer = question.strip(), answer.strip()
         record.status = "edited"
         save_records(records, CANDIDATES_PATH)
         advance()
         st.rerun()
-    if reject.button("❌ Reject", use_container_width=True):
+    if reject.button("❌ Reject", width="stretch"):
         record.status = "rejected"
         save_records(records, CANDIDATES_PATH)
         advance()
         st.rerun()
-    if skip.button("Skip ⏭", use_container_width=True):
+    if skip.button("Skip ⏭", width="stretch"):
         st.session_state.pos = (st.session_state.pos + 1) % len(visible)
         st.rerun()
 

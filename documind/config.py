@@ -35,9 +35,8 @@ class Settings(BaseSettings):
     llm_max_tokens: int = 1500  # reasoning models spend part of this on thinking
     llm_reasoning_effort: str = "low"  # sent only to models that support it (gpt-oss)
 
-    # Embeddings and reranking (run locally)
+    # Embeddings (run locally)
     embedding_model: str = "BAAI/bge-small-en-v1.5"
-    reranker_model: str = "BAAI/bge-reranker-base"
 
     # Chunking
     chunk_strategy: str = Field(default="section", pattern="^(fixed|recursive|section)$")
@@ -49,7 +48,10 @@ class Settings(BaseSettings):
     retrieval_mode: str = Field(default="hybrid", pattern="^(dense|bm25|hybrid)$")
     top_k_candidates: int = 30
     top_k_final: int = 5
-    use_reranker: bool = True
+    # Chosen from the Phase 6 experiments (see README): rewriting the question into regulation
+    # wording, then reranking the top candidates with a small cross-encoder.
+    reranker: str = Field(default="minilm", pattern="^(none|minilm|bge)$")
+    query_rewriting: bool = True
 
     def api_key(self, provider: str) -> str:
         return getattr(self, f"{provider}_api_key", "")

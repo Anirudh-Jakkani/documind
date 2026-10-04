@@ -21,7 +21,7 @@ Demo documents: 42 RBI Directions (commercial banks, payments, foreign exchange,
 | 4 | Test set (128 reviewed questions, incl. unanswerable) | ✅ |
 | 5 | Evaluation harness and baseline scores | ✅ |
 | 6 | Experiments and results table | ✅ |
-| 7 | API and Streamlit interface | |
+| 7 | API and Streamlit interface | ✅ |
 | 8 | Caching, logging, CI | |
 | 9 | Deploy to Hugging Face Spaces | |
 
@@ -148,16 +148,42 @@ paraphrased --modes hybrid --rewrite --rerank minilm` and
 `uv run python -m eval.run answers --name best-paraphrased --dataset paraphrased --rewrite
 --rerank minilm`.
 
+## Known limitations
+
+- **Wording still matters.** "How long does a wallet company need to keep a record of all the
+  transactions made through their wallets?" is answered (ten years, PPI directions), but "How
+  long must a wallet company keep records of transactions made with its wallets?" is not: its
+  rewrite says "wallet issuers" instead of "PPI issuer", and the paragraph is missed.
+- **Context the user leaves out.** "Can the bank charge me a fee for a transaction I reported
+  as fraud?" fails: the rule is in the *credit card* directions ("charges levied on transactions
+  disputed as fraud by the cardholder"), and without "credit card" in the question it never
+  reaches the top 30. DocuMind says it can't find it rather than guessing.
+- **Speed on CPU.** About 6 s per answer with rewriting and reranking (one extra LLM call plus
+  a cross-encoder pass); the more accurate bge reranker takes ~23 s per question on a laptop.
+- **Coverage.** 42 Directions for commercial banks, payments, forex and financial inclusion;
+  rules for NBFCs, co-operative banks and small finance banks are out of scope by design.
+- **Free tiers.** Answers use Gemini's free tier and grading uses Groq's; daily quotas limit how
+  many evaluation runs fit in a day.
+
 ## Run locally
 
-You need [uv](https://docs.astral.sh/uv/).
+You need [uv](https://docs.astral.sh/uv/) and free API keys from Google AI Studio (answers) and
+Groq (evaluation judge).
 
 ```bash
 uv sync
-cp .env.example .env          # then add your Gemini and Groq API keys
-uv run pytest
-uv run uvicorn app.main:app --reload   # http://localhost:8000/docs
+cp .env.example .env                       # then add GEMINI_API_KEY and GROQ_API_KEY
+uv run python -m documind.ingest.download --from-folder <folder with the RBI PDFs>
+uv run python -m documind.ingest.parse     # PDFs -> structured paragraphs
+uv run python -m documind.index --strategy section   # chunks, BM25 and vectors (~12 min on CPU)
+
+uv run streamlit run ui/app.py             # web app: http://localhost:8501
+uv run uvicorn app.main:app --port 8000    # API docs: http://localhost:8000/docs
+uv run pytest                              # tests
 ```
+
+`docs/download_links.html` lists the PDFs (RBI's server blocks scripted downloads, so they are
+downloaded in a browser and imported from a folder).
 
 ## Project layout
 
