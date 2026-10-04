@@ -1,5 +1,7 @@
 # DocuMind
 
+[![CI](https://github.com/Anirudh-Jakkani/documind/actions/workflows/ci.yml/badge.svg)](https://github.com/Anirudh-Jakkani/documind/actions/workflows/ci.yml)
+
 Ask questions about a set of documents and get answers with citations (document, section, page).
 If the answer isn't in the documents, DocuMind says so instead of guessing.
 
